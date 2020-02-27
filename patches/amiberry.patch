@@ -1,0 +1,11 @@
+--- amiberry.sh	2020-02-22 20:26:49.154510499 +0000
++++ amiberry_odroid.sh	2020-02-22 20:43:36.928756428 +0000
+@@ -26,6 +26,8 @@
+         platform="tinker"
+     elif isPlatform "vero4k"; then
+         platform="vero4k"
++    elif isPlatform "odroid-c1"; then
++        platform="c1"
+     fi
+     echo "$platform"
+ }
