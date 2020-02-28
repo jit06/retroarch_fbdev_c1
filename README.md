@@ -10,10 +10,11 @@ Odroid C1/C0 optimized retroarch build based on RetroPie and hardkernel's Ubuntu
 - cbvs mode to ntsc (480p)
 - display set to 640x480 by default (change it in boot.ini)
 - default cpu freq to 1728 (higher = crash during compilation of emulators)
-- no boot message
-- console cursor enabled by default (throught some fbdev apps disable it)
+- no boot message, no login message
+- console cursor enabled by default (throught amiberry disable it...)
 - /var/log in tmpfs (limited to 20Mb), journald log to ram
 - some services disabled : rsyslog, ModemManager, pppd-dns, wpa_supplicant, loadcpufreq
+- handle overscan : simply create /media/boot/overscan and put your value as "x y width height"
 
 
 # important things to note
@@ -31,10 +32,6 @@ Odroid C1/C0 optimized retroarch build based on RetroPie and hardkernel's Ubuntu
 - doom keys
 - xrick launch + pad ?
 - wold4sdl launch + pad ?
-- handle overscan
-- list needed package in install script
 - auto-adjust fs-size (rc.local ?)
-- remove console=tty0 from condev (boot.ini) => no message output
-- remove ubuntu message at login
 - add splash screen
-- launch retroarch at boot
+- auto-login + launch retroarch at boot
