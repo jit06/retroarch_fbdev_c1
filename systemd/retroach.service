@@ -1,0 +1,11 @@
+[Unit]
+Description=Retroarch service
+After=systemd-user-sessions.service network.target sound.target
+ 
+[Service]
+User=root
+Group=root
+ExecStart=/opt/retropie/emulators/retroarch/bin/retroarch
+ 
+[Install]
+WantedBy=multi-user.target

@@ -23,4 +23,9 @@ function retroarch_install() {
     cd /opt/retropie/libretrocores/
     find . -type f -name *.so -exec ln -s {} \;
 
+
+    # copy systemd service to start retroarch at boot
+    cp $ODROIDC1_BUILD_PATH/systemd/retroach.service /etc/systemd/system/
+    systemctl daemon-reload
+    systemctl enable retroarch
 }
