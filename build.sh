@@ -22,15 +22,3 @@ retroarch_optimize()
 
 # clean up
 sudo apt-get clean
-
-
-# misc settings for gameOdroidC0
-# boot param : consoleblank=0
-
-
-# handle overscan:
-# echo 20 0 719 459 > /sys/class/graphics/fb0/window_axis
-# echo 0x10001 > /sys/class/graphics/fb0/free_scale
-
-
-
