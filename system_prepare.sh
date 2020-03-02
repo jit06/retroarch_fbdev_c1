@@ -7,7 +7,7 @@ function system_prepare() {
 
     
     # install needed packages
-    apt-get install git mali-fbdev
+    apt-get install git mali-fbdev plymouth
     
 
     # disable some unwanted services
@@ -18,7 +18,10 @@ function system_prepare() {
     systemctl disable loadcpufreq.service
 
     
-    # allow overscan management
+    # allow overscan management and boot logo display
+    cp $ODROIDC1_BUILD_PATH/splash.png /media/boot/
+    cp $ODROIDC1_BUILD_PATH/boot-logo.bmp /media/boot/
+
     sed -i '/exit 0/d' /etc/rc.local
     echo '
     if [ -f /media/boot/overscan ]; then
@@ -26,7 +29,6 @@ function system_prepare() {
         echo $overscan > /sys/class/graphics/fb0/window_axis
         echo 0x10001 > /sys/class/graphics/fb0/free_scale
     fi
-    
     exit 0
     ' >> /etc/rc.local
 
@@ -44,6 +46,7 @@ function system_prepare() {
 
     
     # quiet login
-     touch /root/.hushlogin
+    # systemctl disable getty@tty1.service
+    touch /root/.hushlogin
 }
 
