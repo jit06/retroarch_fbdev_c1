@@ -8,7 +8,7 @@ Odroid C1/C0 optimized retroarch build based on RetroPie and hardkernel's Ubuntu
 - fast boot : x seconds to retroarch interface
 - consoleblank disabled
 - cbvs mode to ntsc (480p)
-- display set to 640x480 by default (change it in boot.ini)
+- display set to 720x480 by default (change it in boot.ini)
 - default cpu freq to 1728 (higher = crash during compilation of emulators)
 - no boot message, no login message
 - console cursor enabled by default (throught amiberry disable it...)
@@ -23,15 +23,15 @@ Odroid C1/C0 optimized retroarch build based on RetroPie and hardkernel's Ubuntu
 - Copy your roms and bios in /root/RetroPie or change retroarch settings to what ever you prefer
 - enable wpa_supplicant if you need wifi : systemctl enable wpa_supplicant
 - Retroarch : online updater => update all needed things (database, core info...) and create your game list
+- to display splash image before kernel start (uboot) uncomment the corresponding lines in boot.ini
 
 
 # Todo
-- Amiga roms => tests AGA
 - custom emulator config for speed (n64, dreamcast and playstation, retroarch alsathread, latency to 128)
 - themes retroarch
 - doom keys
 - xrick launch + pad ?
 - wold4sdl launch + pad ?
 - auto-adjust fs-size (rc.local ?)
-- add splash screen
-- auto-login + launch retroarch at boot
+- shutdown when retroarch quit
+- add the possibility to change constrast and brigthness like overscan 
