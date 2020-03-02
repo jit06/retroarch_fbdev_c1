@@ -1,6 +1,21 @@
---- boot.ini	2020-02-28 16:25:42.000000000 +0000
-+++ boot.ini.old	2020-02-18 20:02:48.000000000 +0000
-@@ -8,7 +8,7 @@
+--- boot.ini	2020-03-02 22:49:02.000000000 +0000
++++ boot.ini.orig	2020-02-28 16:31:18.000000000 +0000
+@@ -1,14 +1,5 @@
+ ODROIDC-UBOOT-CONFIG
+ 
+-# splash screen before kernel
+-fatload mmc 0:1 0x14000000 boot-logo.bmp 
+-bmp display 0x14000000
+-bmp scale
+-
+-# setenv hdmimode 480p
+-# setenv outputmode 480p
+-# saveenv
+-
+ # Possible screen resolutions
+ # Uncomment only a single Line! The line with setenv written.
+ # At least one mode must be selected.
+@@ -17,7 +8,7 @@
  # setenv m "480x272p60hz"	# 480x272
  # setenv m "480x800p60hz"	# 480x800
  # setenv m "vga"          	# 640x480
@@ -9,7 +24,7 @@
  # setenv m "576p"         	# 720x576
  # setenv m "800x480p60hz" 	# 800x480
  # setenv m "800x600p60hz" 	# 800x600
-@@ -17,7 +17,7 @@
+@@ -26,7 +17,7 @@
  # setenv m "1360x768p60hz" 	# 1360x768
  # setenv m "1440x900p60hz"	# 1440x900
  # setenv m "1600x900p60hz"	# 1600x900
@@ -18,7 +33,7 @@
  # setenv m "720p"         	# 720p 1280x720
  # setenv m "800p"         	# 1280x800
  # setenv m "sxga"         	# 1280x1024
-@@ -73,9 +73,9 @@
+@@ -82,9 +73,9 @@
  setenv hdmioutput "1"
  
  # Default Console Device Setting
@@ -30,7 +45,7 @@
  
  # Enable/Disable ODROID-VU7 Touchscreen
  setenv disable_vu7 "false" # false
-@@ -83,9 +83,9 @@
+@@ -92,9 +83,9 @@
  # CPU Max Frequency
  # Possible Values: 96 192 312 408 504 600 720 816
  # 1008 1200 1320 1488 1536 1632 1728 and 1824
@@ -42,11 +57,11 @@
  # setenv max_freq "1824"
  
  ###########################################
-@@ -95,7 +95,7 @@
+@@ -104,7 +95,7 @@
  if test "${disable_vu7}" = "false"; then setenv hid_quirks "usbhid.quirks=0x0eef:0x0005:0x0004"; fi
  
  # Boot Arguments
--setenv bootargs "root=UUID=e139ce78-9841-40fe-8823-96a304a09859 rootwait rw ${condev} no_console_suspend fsck.repair=yes vdaccfg=0xa000 logo=osd1,loaded,0x7900000,720p,full dmfc=3 cvbsmode=480cvbs hdmimode=${m} m_bpp=${m_bpp} vout=${vout_mode} ${disableuhs} ${hdmi_hpd} ${hdmi_cec} ${enabledac} monitor_onoff=${monitor_onoff} max_freq=${max_freq} ${hid_quirks} fsck.repair=yes net.ifnames=0 consoleblank=0 quiet loglevel=3 rd.systemd.show_status=false udev.log-priority=3"
+-setenv bootargs "root=UUID=e139ce78-9841-40fe-8823-96a304a09859 rootwait rw ${condev} no_console_suspend fsck.repair=yes vdaccfg=0xa000 logo=osd1,loaded,0x7900000,480p,full dmfc=3 cvbsmode=480cvbs hdmimode=${m} m_bpp=${m_bpp} vout=${vout_mode} ${disableuhs} ${hdmi_hpd} ${hdmi_cec} ${enabledac} monitor_onoff=${monitor_onoff} max_freq=${max_freq} ${hid_quirks} fsck.repair=yes net.ifnames=0 consoleblank=0 quiet loglevel=3 rd.systemd.show_status=false udev.log-priority=3"
 +setenv bootargs "root=UUID=e139ce78-9841-40fe-8823-96a304a09859 rootwait rw ${condev} no_console_suspend fsck.repair=yes vdaccfg=0xa000 logo=osd1,loaded,0x7900000,720p,full dmfc=3 cvbsmode=576cvbs hdmimode=${m} m_bpp=${m_bpp} vout=${vout_mode} ${disableuhs} ${hdmi_hpd} ${hdmi_cec} ${enabledac} monitor_onoff=${monitor_onoff} max_freq=${max_freq} ${hid_quirks} fsck.repair=yes net.ifnames=0"
  
  # Booting
