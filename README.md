@@ -24,6 +24,7 @@ It takes several hours to compile and setup everything
 - /var/log in tmpfs (limited to 20Mb), journald log to ram
 - some services disabled : rsyslog, ModemManager, pppd-dns, wpa_supplicant, loadcpufreq
 - handle overscan : simply create /media/boot/overscan and put your value as "x y width height"
+- libretro launcher for amiberry so Amiga games (lha) can be started throught retroarch
 
 # important things to note
 - there is no user except root, password is the default one : odroid

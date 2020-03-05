@@ -24,6 +24,14 @@ function retroarch_install() {
     find . -type f -name *.so -exec ln -s {} \;
 
 
+    # make amiberry launcher
+    cd /root
+    git clone https://github.com/jit06/libretro-amiberry-launcher
+    cd libretro-amiberry-launcher
+    make
+    cp amiberry_launcher_libretro.so /opt/retropie/libretrocores/
+
+
     # copy systemd service to start retroarch at boot
     cp $ODROIDC1_BUILD_PATH/systemd/retroach.service /etc/systemd/system/
     systemctl daemon-reload
