@@ -2,10 +2,9 @@
 
 function retroarch_optimize() {
 
-    # amiberry : set FAST_COPPER=TRUE in all <hardware> to make games playable on C1
+    # amiberry : set FAST_COPPER=TRUE in all <hardware> to make a500 games playable on C1
     sed -i "s/<hardware>/<hardware>FAST_COPPER=TRUE/" /opt/retropie/emulators/amiberry/whdboot/game-data/whdload_db.xml
 
-
-    #TODO : copy corespecific options to make them run fine on C1
-
+    # copy retroarch config to make them run fine on C1
+    cp $ODROIDC1_BUILD_PATH/configs/retroarch* /root/.config/retroarch/
 }
