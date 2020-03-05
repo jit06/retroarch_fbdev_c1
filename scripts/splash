@@ -1,0 +1,2 @@
+#!/bin/sh
+lzop -d -c /etc/splash.lzo > /dev/fb1
