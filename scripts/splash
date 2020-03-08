@@ -1,2 +1,2 @@
 #!/bin/sh
-lzop -d -c /etc/splash.lzo > /dev/fb1
+lzop -d -c /etc/splash.lzo > /dev/fb0
