@@ -31,6 +31,8 @@ function retroarch_install() {
 	echo "--------- finished $package ------------"
 	echo ""
     done
+    # some mali libs seems to be overriden during compilation...
+    apt-get -y install --reinstall  mali-fbdev
 
 
     echo ""
