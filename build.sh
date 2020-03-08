@@ -24,7 +24,7 @@ retroarch_install
 retroarch_optimize
 
 # clean up
-sudo apt-get clean
+apt-get clean
 
 echo ""
 echo "============================================"
