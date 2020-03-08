@@ -23,7 +23,6 @@ function system_prepare() {
     echo "============================================"
     echo " setting up boot logo...                    "
     echo "============================================"
-    cp $ODROIDC1_BUILD_PATH/splash.png /media/boot/
     cp $ODROIDC1_BUILD_PATH/boot-logo.bmp /media/boot/
     echo "/dev/mmcblk0 0x80000 0x8000" > /etc/fw_env.config
     fw_setenv preloadlogo 'video open;video clear; video dev open ${outputmode};fatload mmc 0:1 ${loadaddr_logo} boot-logo.bmp;bmp display ${loadaddr_logo}; bmp scale'
