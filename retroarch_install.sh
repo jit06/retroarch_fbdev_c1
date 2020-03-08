@@ -23,9 +23,13 @@ function retroarch_install() {
     echo " build wanted retropie packages...          "
     echo "============================================"
     # Build Retroarch / Retropie packages
-    for package in $PACKAGES
+    cd $RETROPIE_SETUP_PATH
+    for package in ${PACKAGES[@]}
     do
-        $RETROPIE_SETUP_PATH/retropie_packages.sh package
+	echo "----------- start $package -------------"
+        ./retropie_packages.sh $package
+	echo "--------- finished $package ------------"
+	echo ""
     done
 
 
@@ -53,7 +57,7 @@ function retroarch_install() {
     echo " set retroarch to start on boot...          "
     echo "============================================"
     # copy systemd service to start retroarch at boot
-    cp $ODROIDC1_BUILD_PATH/systemd/retroach.service /etc/systemd/system/
+    cp $ODROIDC1_BUILD_PATH/systemd/retroarch.service /etc/systemd/system/
     systemctl daemon-reload
     systemctl enable retroarch
 }
