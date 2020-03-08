@@ -1,8 +1,8 @@
 #!/bin/bash
 
 # retropie packages to compile and install
-PACKAGES=retroarch \
-         amiberry \
+PACKAGES="retroarch \
+	 amiberry \
          lr-atari800 \
          lr-beetle-ngp \
          lr-beetle-pce-fast \
@@ -30,4 +30,4 @@ PACKAGES=retroarch \
          lr-stella2014 \
          lr-tyrquake \
          lr-vecx \
-         lr-xrick
+         lr-xrick"

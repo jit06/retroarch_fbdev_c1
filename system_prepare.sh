@@ -3,10 +3,10 @@
 function system_prepare() {
 
     # update / upgrade the base system
-    apt-get update && apt-get upgrade apt-get dist-upgrade 
+    apt-get update && apt-get -y upgrade apt-get -y dist-upgrade 
   
     # install needed packages
-    apt-get install git mali-fbdev u-boot-tools busybox fbi
+    apt-get -y install git mali-fbdev u-boot-tools busybox fbi
             
     # boot logo display
     cp $ODROIDC1_BUILD_PATH/splash.png /media/boot/
