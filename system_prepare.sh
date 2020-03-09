@@ -40,7 +40,7 @@ function system_prepare() {
     fw_setenv display_height 480
 
 
-    # allow overscan management throught overscan file in /media/boot
+    # allow overscan, brightness and contrast management throught files in /media/boot
     echo ""
     echo "============================================"
     echo " setting up display management...           "
@@ -51,6 +51,14 @@ function system_prepare() {
         overscan=$(cat /media/boot/overscan)
         echo $overscan > /sys/class/graphics/fb0/window_axis
         echo 0x10001 > /sys/class/graphics/fb0/free_scale
+    fi
+    if [ -f /media/boot/contrast ]; then
+        contrast=$(cat /media/boot/contrast)
+        echo $contrast > /sys/class/video/vpp_contrast
+    fi
+    if [ -f /media/boot/brightness ]; then
+        brightness=$(cat /media/boot/brightness)
+        echo $brightness > /sys/class/video/vpp_brightness
     fi
     exit 0
     ' >> /etc/rc.local
