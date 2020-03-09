@@ -34,8 +34,10 @@ function system_prepare() {
     echo "============================================"
     fw_setenv hdmimode 480p60hz
     fw_setenv outputmode 480p
-    fw_setenv fb_width=720
-    fw_setenv fb_height=480
+    fw_setenv fb_width 720
+    fw_setenv fb_height 480
+    fw_setenv display_width 720
+    fw_setenv display_height 480
 
 
     # allow overscan management throught overscan file in /media/boot
