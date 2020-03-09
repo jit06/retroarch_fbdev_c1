@@ -18,7 +18,6 @@ PACKAGES=(retroarch
          lr-handy \
          lr-mame2003 \
          lr-mgba \
-         lr-mrboom \
          lr-mupen64plus \
          lr-nestopia \
          lr-pcsx-rearmed \
@@ -29,5 +28,4 @@ PACKAGES=(retroarch
          lr-snes9x2010 \
          lr-stella2014 \
          lr-tyrquake \
-         lr-vecx \
-         lr-xrick)
+         lr-vecx)
