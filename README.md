@@ -13,10 +13,12 @@ It has been designed for lowres display (cbvs / 720x480)
 - clone this repository in /root
 - cd /root/retroarch_fbdev_c1
 - ./build.sh
+- reboot
+- in retroarch, go to "online updater" and update all but cores
 
 It takes several hours to compile and setup everything
 
-# Features
+# Main Features
 - fast boot : 14 seconds to retroarch interface from cold start
 - consoleblank disabled
 - cbvs mode to ntsc (480p)
@@ -32,11 +34,12 @@ It takes several hours to compile and setup everything
 - libretro launcher for amiberry so Amiga games (lha) can be started throught retroarch
 
 # important things to note
-- there is no user except root, password is the default one : odroid
+- there is no else user than root, password is the default one : odroid
 - uhs is enabled by default. Change it if your SDcard is not compatible (boot.ini)
 - Copy your roms and bios in /root/RetroPie or change retroarch settings or mount any usbkey or sdcard to /root/Retropie
 - enable wpa_supplicant if you need wifi : systemctl enable wpa_supplicant
-- Retroarch : use online updater to update all but cores before doing anything else
+- Amiga emulator (amiberry) is configured to use .lha games (whdload)
+
 
 # Todo
 - themes retroarch
