@@ -1,0 +1,20 @@
+--- system.sh	2020-03-14 22:54:01.395964875 +0000
++++ system.sh.new	2020-03-15 11:25:05.936515158 +0000
+@@ -47,7 +47,7 @@
+ function conf_memory_vars() {
+     __memory_total_kb=$(awk '/^MemTotal:/{print $2}' /proc/meminfo)
+     __memory_total=$(( "$__memory_total_kb" / 1024 ))
+-    __memory_avail_kb=$(awk '/^MemAvailable:/{print $2}' /proc/meminfo)
++    __memory_avail_kb=$(awk '/^Mem/ {print $7}' <(free))
+     __memory_avail=$(( "$__memory_avail_kb" / 1024 ))
+ }
+ 
+@@ -404,7 +404,7 @@
+ }
+ 
+ function platform_odroid-c1() {
+-    __default_cpu_flags="-mcpu=cortex-a5 -mfpu=neon-vfpv4 -mfloat-abi=hard"
++    __default_cpu_flags="-D__ARM_NEON__ -march=armv7-a -mtune=cortex-a5 -mfpu=neon-vfpv4 -mfloat-abi=hard"
+     __platform_flags="arm armv7 neon mali gles"
+     __qemu_cpu=cortex-a9
+ }

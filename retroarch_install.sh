@@ -17,6 +17,7 @@ function retroarch_install() {
     # apply some custom patches for Odroid c1 to make compilation works
     patch $RETROPIE_SETUP_PATH/scriptmodules/libretrocores/lr-flycast.sh $ODROIDC1_BUILD_PATH/patches/lr-flycast.patch
     patch $RETROPIE_SETUP_PATH/scriptmodules/emulators/amiberry.sh $ODROIDC1_BUILD_PATH/patches/amiberry.patch
+	patch $RETROPIE_SETUP_PATH/scriptmodules/system.sh $ODROIDC1_BUILD_PATH/patches/retropie_system.sh.patch
 
     echo ""
     echo "============================================"
