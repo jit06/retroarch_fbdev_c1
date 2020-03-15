@@ -1,5 +1,5 @@
---- boot.ini	2020-03-08 09:52:34.000000000 +0000
-+++ boot.ini.new	2020-03-08 12:51:19.000000000 +0000
+--- boot.ini	2020-03-13 21:24:54.000000000 +0000
++++ boot.ini.new	2020-03-15 12:11:59.000000000 +0000
 @@ -8,7 +8,7 @@
  # setenv m "480x272p60hz"	# 480x272
  # setenv m "480x800p60hz"	# 480x800
@@ -63,7 +63,7 @@
  if test "${disable_vu7}" = "false"; then setenv hid_quirks "usbhid.quirks=0x0eef:0x0005:0x0004"; fi
  
  # Boot Arguments
--setenv bootargs "root=UUID=e139ce78-9841-40fe-8823-96a304a09859 rootwait ro ${condev} no_console_suspend fsck.repair=yes vdaccfg=0xa000 logo=osd1,loaded,0x7900000,720p,full dmfc=3 cvbsmode=576cvbs hdmimode=${m} m_bpp=${m_bpp} vout=${vout_mode} ${disableuhs} ${hdmi_hpd} ${hdmi_cec} ${enabledac} monitor_onoff=${monitor_onoff} max_freq=${max_freq} ${hid_quirks} fsck.repair=yes net.ifnames=0"
+-setenv bootargs "root=UUID=e139ce78-9841-40fe-8823-96a304a09859 rootwait rw ${condev} no_console_suspend fsck.repair=yes vdaccfg=0xa000 logo=osd1,loaded,0x7900000,720p,full dmfc=3 cvbsmode=576cvbs hdmimode=${m} m_bpp=${m_bpp} vout=${vout_mode} ${disableuhs} ${hdmi_hpd} ${hdmi_cec} ${enabledac} monitor_onoff=${monitor_onoff} max_freq=${max_freq} ${hid_quirks} fsck.repair=yes net.ifnames=0"
 +setenv bootargs "root=UUID=e139ce78-9841-40fe-8823-96a304a09859 rootwait rw ${condev} no_console_suspend fsck.repair=yes vdaccfg=0xa000 logo=osd1,loaded,0x7900000,480p,full dmfc=3 cvbsmode=480cvbs hdmimode=${m} m_bpp=${m_bpp} vout=${vout_mode} ${disableuhs} ${hdmi_hpd} ${hdmi_cec} ${enabledac} monitor_onoff=${monitor_onoff} max_freq=${max_freq} ${hid_quirks} fsck.repair=yes net.ifnames=0 consoleblank=0 quiet loglevel=3 rd.systemd.show_status=false udev.log-priority=3"
  
  # Booting
