@@ -32,6 +32,7 @@ Note that it takes several hours to compile and setup everything
 - handle display constrast : simply create /media/boot/contrast and write a positive or negative interger
 - handle display brightness : simply create /media/boot/brightness and write a positive or negative interger
 - libretro launcher for amiberry so Amiga games (lha) can be started throught retroarch
+- fbneo dat files ar present in /root/.config/retroarch to get good naming with retroarch scraper
 
 # important things to note
 - there is no else user than root, password is the default one : odroid
