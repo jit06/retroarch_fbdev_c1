@@ -41,6 +41,13 @@ Note that it takes several hours to compile and setup everything
 - Amiga emulator (amiberry) is configured to use .lha games (whdload)
 - tty1 is disabled, use another one or use ssh
 
+# logo and splash screen
+The first logo is displayed by uboot. The file boot-logo.bmp is copied to /media/boot, you can change it before launching build.sh or after the installation by changing the image in /media/boot.
+This image must be a 24 bit 720x480 BMP image.
+ 
+The splash screen can be generated using the script utils/create_splash.sh, which use the image splash.png.
+Basicaly, it installs fbi, display the picture to fbdev, dump /dev/fbo and compress it to lzo.
+
 # Todo
 - themes retroarch
 - create rebuild imnage with auto-adjust fs size (rc.local ?)
