@@ -16,7 +16,7 @@ function system_prepare() {
     echo "============================================"
     echo " install needed packages...                 "
     echo "============================================"
-    apt-get -y install git mali-fbdev u-boot-tools busybox fbi gcc-8 g++-8
+    apt-get -y install git mali-fbdev u-boot-tools busybox fbi gcc-8 g++-8 xsltproc
     
     # set gcc version default to 8 else lr-flycast does not compile correctly
     update-alternatives --set gcc "/usr/bin/gcc-8"
