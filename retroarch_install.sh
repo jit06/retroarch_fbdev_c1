@@ -31,6 +31,8 @@ function retroarch_install() {
         ./retropie_packages.sh $package
 	echo "--------- finished $package ------------"
 	echo ""
+ 	# set dedicated folder for pcengine CDrom games
+ 	mkdir /root/RetroPie/roms/pce-cd/
     done
     # some mali libs seems to be overriden during compilation...
     apt-get -y install --reinstall  mali-fbdev
