@@ -1,8 +1,9 @@
 #!/bin/bash
 
 # retropie packages to compile and install
-PACKAGES=(retroarch
-	     amiberry
+PACKAGES=(retroarch \
+		 skyscraper \
+	     amiberry \
          lr-atari800 \
          lr-beetle-ngp \
          lr-beetle-pce-fast \
