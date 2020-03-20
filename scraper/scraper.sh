@@ -38,9 +38,6 @@ declare -A DIRS=(	[amiga]="Commodore - Amiga"
 					[zxspectrum]="Sinclair - ZX Spectrum"
 				)
 
-#declare -A DIRS=(	[sega32x]="Sega - 32X" 
-#					[wonderswancolor]="Bandai - WonderSwan Color"
-#				)
 
 echo ""
 
@@ -48,7 +45,7 @@ for retropie_dir in "${!DIRS[@]}"; do
 	echo "=================================="
 	echo " system '${DIRS[$retropie_dir]}'"
 	echo "=================================="
-	
+
 	# scrap with skyscraper in system roms dir
 	if [ ! -d "$RETROPIE_ROMS/$retropie_dir/media" ]; then
 		mkdir "$RETROPIE_ROMS/$retropie_dir/media"
@@ -68,7 +65,7 @@ for retropie_dir in "${!DIRS[@]}"; do
 	if [ ! -d "$RETROARCH_DIR/thumbnails/${DIRS[$retropie_dir]}" ]; then
 		mkdir "$RETROARCH_DIR/thumbnails/${DIRS[$retropie_dir]}"
 	fi
-	
+
 	cd "$RETROARCH_DIR/thumbnails/${DIRS[$retropie_dir]}"
 	rm -R Named_*
 	ln -s "$RETROPIE_ROMS/$retropie_dir/media/covers" Named_Boxarts 
