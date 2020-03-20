@@ -17,7 +17,7 @@ system_prepare
 # tweak for fast boot and fewer disk write
 system_optimize
 # create uInitrd with splash image
- system_splash
+system_splash
 # compile retroarch and emulator cores
 retroarch_install
 # change some settings to make emulators faster on the C1/C0
@@ -28,5 +28,11 @@ apt-get clean
 
 echo ""
 echo "============================================"
-echo "if everything went ok, you should reboot now"
+echo " execute some tests to check for errors...  "
+echo "============================================"
+$ODROIDC1_BUILD_PATH/check_install.sh
+
+echo ""
+echo "============================================"
+echo "if there is no error, you should reboot now "
 echo "============================================"
