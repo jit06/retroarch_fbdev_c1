@@ -40,7 +40,7 @@ do
 		display_error "missing libretro $lib : check compilation errors"
 	fi
 done
-	
+
 
 # check thzat retroarch service has been created
 systemctl daemon-reload
