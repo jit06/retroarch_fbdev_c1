@@ -6,6 +6,7 @@ SCRIPT=$(readlink -f $0)
 SCRIPTPATH=`dirname $SCRIPT`
 SKYSCRAPER_CMD=/opt/retropie/supplementary/skyscraper/Skyscraper
 
+# match Retropie's system name with Retroarch's one
 declare -A DIRS=(	[amiga]="Commodore - Amiga"
 					[amstradcpc]="Amstrad - CPC"
 					[atari2600]="Atari - 2600"
@@ -42,6 +43,14 @@ declare -A DIRS=(	[amiga]="Commodore - Amiga"
 echo ""
 
 for retropie_dir in "${!DIRS[@]}"; do 
+	
+	# do nothing if the system is not used
+	if [ ! -d "$RETROPIE_ROMS/$retropie_dir" ]; then
+		echo "no $retropie_dir directory: skipped"
+		echo ""
+		continue
+	fi
+
 	echo "=================================="
 	echo " system '${DIRS[$retropie_dir]}'"
 	echo "=================================="
@@ -51,7 +60,17 @@ for retropie_dir in "${!DIRS[@]}"; do
 		mkdir "$RETROPIE_ROMS/$retropie_dir/media"
 	fi
 
-	$SKYSCRAPER_CMD -p $retropie_dir \
+	# handle custom system dir
+	if [ "$retropie_dir" = "pce-cd" ]; then
+		system="pcengine"
+	elif [ "$retropie_dir" = "satellaview" ]; then
+		system="snes"
+	else
+		system=$retropie_dir
+	fi
+
+	# scrap ! you may change "screenscraper" value to whatever skyscraper source you prefer
+	$SKYSCRAPER_CMD -p $system \
 					-g "$RETROPIE_ROMS/$retropie_dir" \
 					-o "$RETROPIE_ROMS/$retropie_dir/media" \
 					-s screenscraper \
@@ -65,7 +84,7 @@ for retropie_dir in "${!DIRS[@]}"; do
 	if [ ! -d "$RETROARCH_DIR/thumbnails/${DIRS[$retropie_dir]}" ]; then
 		mkdir "$RETROARCH_DIR/thumbnails/${DIRS[$retropie_dir]}"
 	fi
-
+	
 	cd "$RETROARCH_DIR/thumbnails/${DIRS[$retropie_dir]}"
 	rm -R Named_*
 	ln -s "$RETROPIE_ROMS/$retropie_dir/media/covers" Named_Boxarts 
