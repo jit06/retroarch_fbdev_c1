@@ -79,6 +79,15 @@ for retropie_dir in "${!DIRS[@]}"; do
 					--nohints \
 					--nomarquees \
 					-u $1:$2
+	
+	# generate gamelist
+	$SKYSCRAPER_CMD -p $system \
+					-g "$RETROPIE_ROMS/$retropie_dir" \
+					-o "$RETROPIE_ROMS/$retropie_dir/media" \
+					--unattend \
+					--relative \
+					--nohints \
+					--nomarquees
 
 	# point retroarch thumbnails directories to skyscraper one's
 	if [ ! -d "$RETROARCH_DIR/thumbnails/${DIRS[$retropie_dir]}" ]; then
