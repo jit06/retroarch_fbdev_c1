@@ -7,7 +7,7 @@ SCRIPTPATH=`dirname $SCRIPT`
 SKYSCRAPER_CMD=/opt/retropie/supplementary/skyscraper/Skyscraper
 
 # match Retropie's system name with Retroarch's one
-declare -A DIRS=(#	[amiga]="Commodore - Amiga"
+declare -A DIRS=( 	[amiga]="Commodore - Amiga"
 					[amstradcpc]="Amstrad - CPC"
 					[atari2600]="Atari - 2600"
 					[atari5200]="Atari - 5200"
@@ -35,7 +35,7 @@ declare -A DIRS=(#	[amiga]="Commodore - Amiga"
 					[satellaview]="Nintendo - Satellaview"
 					[wonderswan]="Bandai - WonderSwan"
 					[wonderswancolor]="Bandai - WonderSwan Color"
-    				[vectrex]="GCE - Vectrex"
+   				    [vectrex]="GCE - Vectrex"
 					[zxspectrum]="Sinclair - ZX Spectrum"
 				)
 
