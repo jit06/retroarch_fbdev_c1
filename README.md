@@ -1,7 +1,7 @@
 # retroarch_fbdev_c1
 
 Odroid C1/C0 optimized retroarch build scripts, based on RetroPie and hardkernel's Ubuntu minimal image.
-It uses fbdev (no X) and allows to play confortably a lots of retro consoles including n64 and dreamcast.
+It uses fbdev (no X) and allows to play confortably a lots of retro consoles including some n64 and dreamcast games (eg. MarioKart, Mario64, CrazyTaxy, Sonic adventure...).
 It provides a way to scrap roms with skyscraper and convert de result into retroarch compatible playlists and thumbnails
 It has been designed for lowres display (cbvs or 480p).
 
