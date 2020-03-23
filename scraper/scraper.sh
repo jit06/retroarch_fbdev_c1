@@ -7,7 +7,7 @@ SCRIPTPATH=`dirname $SCRIPT`
 SKYSCRAPER_CMD=/opt/retropie/supplementary/skyscraper/Skyscraper
 
 # match Retropie's system name with Retroarch's one
-declare -A DIRS=(	[amiga]="Commodore - Amiga"
+declare -A DIRS=(#	[amiga]="Commodore - Amiga"
 					[amstradcpc]="Amstrad - CPC"
 					[atari2600]="Atari - 2600"
 					[atari5200]="Atari - 5200"
@@ -16,8 +16,8 @@ declare -A DIRS=(	[amiga]="Commodore - Amiga"
 					[dreamcast]="Sega - Dreamcast"
 					[gamegear]="Sega - Game Gear"
 					[gb]="Nintendo - Game Boy"
-					[gba]="Nintendo - Game Boy Color"
-					[gbc]="Nintendo - Game Boy Advance"
+					[gba]="Nintendo - Game Boy Advance"
+					[gbc]="Nintendo - Game Boy Color"
 					[mame2003]="MAME"
 					[mastersystem]="Sega - Master System - Mark III"
 					[megadrive]="Sega - Mega Drive - Genesis"
@@ -35,7 +35,7 @@ declare -A DIRS=(	[amiga]="Commodore - Amiga"
 					[satellaview]="Nintendo - Satellaview"
 					[wonderswan]="Bandai - WonderSwan"
 					[wonderswancolor]="Bandai - WonderSwan Color"
-					[vectrex]="GCE - Vectrex"
+    				[vectrex]="GCE - Vectrex"
 					[zxspectrum]="Sinclair - ZX Spectrum"
 				)
 
@@ -63,6 +63,7 @@ for retropie_dir in "${!DIRS[@]}"; do
 	# handle custom system dir
 	if [ "$retropie_dir" = "pce-cd" ]; then
 		system="pcengine"
+		
 	elif [ "$retropie_dir" = "satellaview" ]; then
 		system="snes"
 	else
@@ -73,6 +74,7 @@ for retropie_dir in "${!DIRS[@]}"; do
 	$SKYSCRAPER_CMD -p $system \
 					-g "$RETROPIE_ROMS/$retropie_dir" \
 					-o "$RETROPIE_ROMS/$retropie_dir/media" \
+					-i "$RETROPIE_ROMS/$retropie_dir" \
 					-s screenscraper \
 					--unattend \
 					--relative \
@@ -84,9 +86,11 @@ for retropie_dir in "${!DIRS[@]}"; do
 	$SKYSCRAPER_CMD -p $system \
 					-g "$RETROPIE_ROMS/$retropie_dir" \
 					-o "$RETROPIE_ROMS/$retropie_dir/media" \
+					-i "$RETROPIE_ROMS/$retropie_dir" \
 					--unattend \
 					--relative \
 					--nohints \
+					--skipped \
 					--nomarquees
 
 	# point retroarch thumbnails directories to skyscraper one's
