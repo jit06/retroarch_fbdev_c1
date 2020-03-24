@@ -76,14 +76,14 @@ All Odroid C1 retropie emulator are compiled, plus lr-flycast and amiberry, so t
 - GCE - Vectrex
 - Sinclair - ZX Spectrum
 
-# important things to note
+# Important things to note
 - there is no else user than root, password is the default one : odroid
 - uhs is enabled by default. Change it if your SDcard is not compatible (boot.ini)
 - enable wpa_supplicant if you need wifi : systemctl enable wpa_supplicant
 - Amiga emulator (amiberry) is configured to use .lha games (whdload)
 - tty1 is disabled, use another one, serial or ssh to login
 
-# logo and splash screen
+# Logo and splash screen
 The first logo is displayed by uboot. The file boot-logo.bmp is copied to /media/boot, you can change it before launching build.sh or after the installation by changing the image in /media/boot.
 This image must be a 24 bit 720x480 BMP image.
  
