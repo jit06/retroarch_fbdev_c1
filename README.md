@@ -5,17 +5,26 @@ It uses fbdev (no X) and allows to play confortably a lots of retro consoles inc
 It provides a way to scrap roms with skyscraper and convert de result into retroarch compatible playlists and thumbnails
 It has been designed for lowres display (cbvs or 480p).
 
-# How to use
+# Install with binary release
+- uncompress de archive with xz (eg. ez -d gamodroidC0_v1.0.img.xz)
+- write it to an emmc or sdcard with must be at least 4GB (eg. sudo dd if=gamodroidC0_v1.0.img of=/dev/sdb bs=4M)
+- boot you Odroid C1/C1+/C0 with it
+
+# Install with sources
 - get official ubuntu minimal 18.04 from Hardkernel and start your Odroid C1/C1+/C0 with it.
 - clone this repository in /root (git clone -depth 1 https://github.com/jit06/retroarch_fbdev_c1)
 - cd /root/retroarch_fbdev_c1
 - ./build.sh
 - reboot
 - in retroarch: use online updater to update all but cores before doing anything else
+
+Note that it takes several hours to compile and setup everything
+
+# Roms & scraper
 - Copy your roms and bios in /root/RetroPie or change retroarch settings or mount any usbkey or sdcard to /root/Retropie (ssh is enabled)
 - If you want to use a better scraper than retroarch one's, go to /root/retroarch_fbdev_c1/scraper and launch ./scraper.sh (optionals args are screenscraper login and password, eg. ./scraper.sh mylogin mypassword)
 
-Note that it takes several hours to compile and setup everything
+Basicaly, it's a retropie install without emulationstation.
 
 # Main Features
 - fast boot : 14 seconds to retroarch interface from cold start
