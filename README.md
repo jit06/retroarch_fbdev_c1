@@ -1,4 +1,4 @@
-# retroarch_fbdev_c1
+![Gamodroid](https://www.bluemind.org/wp-content/uploads/2017/08/logo_gamodroid_c0.png#center)
 
 Odroid C1/C0 optimized retroarch build scripts, based on RetroPie and hardkernel's Ubuntu minimal image.
 It uses fbdev (no X) and allows to play confortably a lots of retro consoles including some n64 and dreamcast games (eg. MarioKart, Mario64, CrazyTaxy, Sonic adventure...).
