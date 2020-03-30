@@ -77,11 +77,11 @@ All Odroid C1 retropie emulator are compiled, plus lr-flycast and amiberry, so t
 - Sinclair - ZX Spectrum
 
 # Important things to note
-- there is no else user than root, password is the default one : odroid
+- there is no other user than root, password is the default one : odroid
 - uhs is enabled by default. Change it if your SDcard is not compatible (boot.ini)
 - enable wpa_supplicant if you need wifi : systemctl enable wpa_supplicant
 - Amiga emulator (amiberry) is configured to use .lha games (whdload)
-- tty1 is disabled, use another one, serial or ssh to login
+- tty1 is disabled, use another one or serial or ssh to login
 
 # Logo and splash screen
 The first logo is displayed by uboot. The file boot-logo.bmp is copied to /media/boot, you can change it before launching build.sh or after the installation by changing the image in /media/boot.
@@ -90,7 +90,14 @@ This image must be a 24 bit 720x480 BMP image.
 The splash screen can be generated using the script utils/create_splash.sh, which use the image splash.png.
 Basicaly, it installs fbi, display the picture to fbdev, dump /dev/fbo and compress it to lzo.
 
-# Todo
+# Todo (in no particular order)
 - correct the bug of boot logo being trashed
 - themes retroarch
 - shutdown when retroarch quit
+- integrate my gpio_joypad as systemd service
+- remove uneeded patch (retropie has been update following my demand)
+- add mupen64plus-next (for now, it crashes after rom load)
+- turn off retroarch logs by default
+- assign a default emulator during skyscraper to retroarch playlist conversion
+- integrate bash launcher for retroarch and ad menu entries for changing contrast, brightness, cpu freq and display (cbvs / hdmi)
+- list known n64 and dreamcast games that run correctly
