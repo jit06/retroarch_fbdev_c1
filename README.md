@@ -96,7 +96,6 @@ Basicaly, it installs fbi, display the picture to fbdev, dump /dev/fbo and compr
 - integrate my gpio_joypad as systemd service
 - remove uneeded patch (retropie has been update following my demand)
 - add mupen64plus-next (for now, it crashes after rom load)
-- turn off retroarch logs by default
 - assign a default emulator during skyscraper to retroarch playlist conversion
 - integrate bash launcher for retroarch and ad menu entries for changing contrast, brightness, cpu freq and display (cbvs / hdmi)
 - list known n64 and dreamcast games that run correctly
