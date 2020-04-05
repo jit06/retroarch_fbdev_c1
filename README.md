@@ -91,7 +91,6 @@ The splash screen can be generated using the script utils/create_splash.sh, whic
 Basicaly, it installs fbi, display the picture to fbdev, dump /dev/fbo and compress it to lzo.
 
 # Todo (in no particular order)
-- correct the bug of boot logo being trashed
 - themes retroarch
 - shutdown when retroarch quit
 - integrate my gpio_joypad as systemd service
