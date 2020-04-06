@@ -62,6 +62,7 @@ function retroarch_install() {
     echo " set retroarch to start on boot...          "
     echo "============================================"
     # copy systemd service to start retroarch at boot
+    cp $ODROIDC1_BUILD_PATH/scripts/start_retroarch.sh /opt/
     cp $ODROIDC1_BUILD_PATH/systemd/retroarch.service /etc/systemd/system/
     systemctl daemon-reload
     systemctl enable retroarch

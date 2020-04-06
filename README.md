@@ -92,7 +92,6 @@ Basicaly, it installs fbi, display the picture to fbdev, dump /dev/fbo and compr
 
 # Todo (in no particular order)
 - themes retroarch
-- shutdown when retroarch quit
 - integrate my gpio_joypad as systemd service
 - remove uneeded patch (retropie has been update following my demand)
 - add mupen64plus-next (for now, it crashes after rom load)
