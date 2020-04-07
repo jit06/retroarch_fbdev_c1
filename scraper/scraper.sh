@@ -39,7 +39,6 @@ declare -A DIRS=( 	[amiga]="Commodore - Amiga"
 					[zxspectrum]="Sinclair - ZX Spectrum"
 				)
 
-
 echo ""
 
 for retropie_dir in "${!DIRS[@]}"; do 
@@ -102,7 +101,7 @@ for retropie_dir in "${!DIRS[@]}"; do
 	rm -R Named_*
 	ln -s "$RETROPIE_ROMS/$retropie_dir/media/covers" Named_Boxarts 
 	ln -s "$RETROPIE_ROMS/$retropie_dir/media/screenshots" Named_Snaps   
-	ln -s "$RETROPIE_ROMS/$retropie_dir/media/wheels" Named_Titles
+	ln -s "$RETROPIE_ROMS/$retropie_dir/media/marquees" Named_Titles
 
 	# convert skyscraper gamelist to retroarch playlists
 	xsltproc --stringparam db_name "${DIRS[$retropie_dir]}.lpl" --stringparam rom_path "$RETROPIE_ROMS/$retropie_dir" "$SCRIPTPATH/skyscraperToPlaylist.xsl" "$RETROPIE_ROMS/$retropie_dir/gamelist.xml" > "$RETROARCH_DIR/playlists/${DIRS[$retropie_dir]}.lpl"
