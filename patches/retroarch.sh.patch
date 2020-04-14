@@ -1,0 +1,10 @@
+--- retroarch.sh	2020-04-14 21:15:22.274648867 +0000
++++ retroarch.sh.new	2020-04-14 21:18:42.706419108 +0000
+@@ -44,6 +44,7 @@
+     applyPatch "$md_data/02_disable_search.diff"
+     applyPatch "$md_data/03_shader_path_config_enable.diff"
+     applyPatch "$md_data/04_fix_corrupted_widgets.diff"
++    mv /root/xmb.c "$md_build/retroarch/menu/drivers/" 
+ }
+ 
+ function build_retroarch() {
