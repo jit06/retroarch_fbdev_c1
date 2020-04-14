@@ -57,6 +57,12 @@ function retroarch_install() {
     make
     cp amiberry_launcher_libretro.so /opt/retropie/libretrocores/
 
+	echo ""
+    echo "============================================"
+    echo " Install custom retroarch theme...          "
+    echo "============================================"
+	cp -R $ODROIDC1_BUILD_PATH/skin/Retroarch/GamOdroid_theme /root/.config/retroarch/
+
     echo ""
     echo "============================================"
     echo " set retroarch to start on boot...          "
