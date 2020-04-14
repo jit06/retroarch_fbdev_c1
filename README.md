@@ -28,6 +28,7 @@ Basicaly, it's a retropie install without emulationstation.
 
 # Main Features
 - fast boot : 14 seconds to retroarch interface from cold start
+- custom XMB theme and layout
 - consoleblank disabled
 - cbvs mode set to ntsc (60fps) 
 - display set to 720x480 by default (you can change it in build script, but logo and splash image won't have the right size)
@@ -91,7 +92,6 @@ The splash screen can be generated using the script utils/create_splash.sh, whic
 Basicaly, it installs fbi, display the picture to fbdev, dump /dev/fbo and compress it to lzo.
 
 # Todo (in no particular order)
-- themes retroarch
 - integrate my gpio_joypad as systemd service
 - remove uneeded patch for system.sh and amiberry (retropie has been updated)
 - add mupen64plus-next (for now, it crashes after rom load)
