@@ -6522,15 +6522,24 @@ static enum menu_action xmb_parse_menu_entry_action(
       xmb_handle_t *xmb, enum menu_action action)
 {
    enum menu_action new_action = action;
+   // MOD
+   size_t selection;
+   menu_entry_t entry;
+   char video_command[1024];
+   static int playing_video=0;
 
+   // MOD
    /* If fullscreen thumbnail view is active, any
     * valid menu action will disable it... */
-   if (xmb->show_fullscreen_thumbnails)
+   if (playing_video/*xmb->show_fullscreen_thumbnails*/)
    {
       if (action != MENU_ACTION_NOOP)
       {
-         xmb_hide_fullscreen_thumbnails(xmb, true);
-
+	 // MOD
+         //xmb_hide_fullscreen_thumbnails(xmb, true);
+	 system("/opt/video_blank.sh 1");
+	 system("/opt/video_order.sh quit");
+	 playing_video=0;
          /* ...and any action other than Select/OK
           * is ignored
           * > We allow pass-through of Select/OK since
@@ -6556,15 +6565,30 @@ static enum menu_action xmb_parse_menu_entry_action(
    switch (action)
    {
       case MENU_ACTION_START:
+         // MOD
+	selection = menu_navigation_get_selection();
+	menu_entry_init(&entry);
+	entry.path_enabled = false;
+	entry.value_enabled = false;
+	entry.rich_label_enabled = false;
+	entry.sublabel_enabled = false;
+	menu_entry_get(&entry, 0, selection, NULL, true);
+
+    sprintf(video_command, "/opt/video_play.sh \"%s\"", entry.label);
+	//printf("video cmd: %s\n",video_command);
+    system(video_command);
+	system("/opt/video_blank.sh 0");
+	playing_video=1;
+
          /* If this is a menu with thumbnails, attempt
           * to show fullscreen thumbnail view */
-         if (xmb->fullscreen_thumbnails_available)
-         {
-            size_t selection = menu_navigation_get_selection();
-
-            xmb_show_fullscreen_thumbnails(xmb, selection);
-            new_action = MENU_ACTION_NOOP;
-         }
+//         if (xmb->fullscreen_thumbnails_available)
+//         {
+//            size_t selection = menu_navigation_get_selection();
+//
+//            xmb_show_fullscreen_thumbnails(xmb, selection);
+//            new_action = MENU_ACTION_NOOP;
+//         }
          break;
       default:
          /* In all other cases, pass through input

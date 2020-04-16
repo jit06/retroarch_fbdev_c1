@@ -10,19 +10,18 @@ function system_prepare() {
     apt-get update
     apt-get -y upgrade 
     apt-get -y dist-upgrade 
-  
+
     # install needed packages
     echo ""
     echo "============================================"
     echo " install needed packages...                 "
     echo "============================================"
-    apt-get -y install git mali-fbdev u-boot-tools busybox fbi gcc-8 g++-8 xsltproc
-    
+    apt-get -y install git mali-fbdev u-boot-tools busybox fbi gcc-8 g++-8 xsltproc mplayer
+
     # set gcc version default to 8 else lr-flycast does not compile correctly
     update-alternatives --set gcc "/usr/bin/gcc-8"
     update-alternatives --set g++ "/usr/bin/g++-8"
-            
-            
+
     # boot logo display
     echo ""
     echo "============================================"
@@ -65,10 +64,13 @@ function system_prepare() {
         brightness=$(cat /media/boot/brightness)
         echo $brightness > /sys/class/video/vpp_brightness
     fi
+    if [ -e /dev/mmcblk1p1 ]; then
+        mount /dev/mmcblk1p1 /root/RetroPie
+    fi
     exit 0
     ' >> /etc/rc.local
 
-    
+
     # add cursor to console for all users
     echo ""
     echo "============================================"
@@ -84,12 +86,19 @@ function system_prepare() {
     tic ~/.terminfo.txt > /dev/null
     tput cnorm" >> /etc/profile
 
-    
+    # mplayer stuff for video preview
+    echo ""
+    echo "============================================"
+    echo " setting up mplayer for video preview...    "
+    echo "============================================"
+    mkfifo /root/.mplayer/fifo
+    cp $ODROIDC1_BUILD_PATH/scripts/video_*.sh /opt
+
     # quiet login
     echo ""
     echo "============================================"
     echo " quiet login and boot...	              "
-    echo "============================================"    
+    echo "============================================"
     systemctl disable getty@tty1.service
     touch /root/.hushlogin
 }
