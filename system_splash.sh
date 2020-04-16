@@ -3,7 +3,7 @@
 function system_splash() {
     echo ""
     echo "============================================"
-    echo " disable unwanted services...               "
+    echo " Install splash screen...	                  "
     echo "============================================"
 	
     # set initramfs script for splash screen 
