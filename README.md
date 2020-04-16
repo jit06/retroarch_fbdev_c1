@@ -3,7 +3,7 @@
 Odroid C1/C0 optimized retroarch build scripts, based on RetroPie and hardkernel's Ubuntu minimal image.
 It uses fbdev (no X) and allows to play confortably a lots of retro consoles including some n64 and dreamcast games (eg. MarioKart, Mario64, CrazyTaxy, Sonic adventure...).
 It provides a way to scrap roms with skyscraper and convert de result into retroarch compatible playlists and thumbnails
-It has been designed for lowres display (cbvs or 480p).
+It has been designed for lowres display (cbvs or 480p), suitable for small display or true NTSC composite display.
 
 # Install with binary release
 - uncompress de archive with xz (eg. ez -d gamodroidC0_v1.0.img.xz)
@@ -28,7 +28,7 @@ Basicaly, it's a retropie install without emulationstation.
 
 # Main Features
 - fast boot : 14 seconds to retroarch interface from cold start
-- custom XMB theme and layout
+- custom XMB theme and layout with video preview (press start to view it)
 - consoleblank disabled
 - cbvs mode set to ntsc (60fps) 
 - display set to 720x480 by default (you can change it in build script, but logo and splash image won't have the right size)
@@ -92,8 +92,10 @@ The splash screen can be generated using the script utils/create_splash.sh, whic
 Basicaly, it installs fbi, display the picture to fbdev, dump /dev/fbo and compress it to lzo.
 
 # Todo (in no particular order)
-- integrate my gpio_joypad as systemd service
+- video preview is not shown after trying a game that don't have one
+- integrate accelerated video player for video preview
 - remove uneeded patch for system.sh and amiberry (retropie has been updated)
+- integrate my gpio_joypad as systemd service
 - add mupen64plus-next (for now, it crashes after rom load)
 - assign a default emulator during skyscraper to retroarch playlist conversion
 - integrate bash launcher for retroarch and ad menu entries for changing contrast, brightness, cpu freq and display (cbvs / hdmi)
