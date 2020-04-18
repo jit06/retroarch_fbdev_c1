@@ -76,6 +76,7 @@ for retropie_dir in "${!DIRS[@]}"; do
 					-o "$RETROPIE_ROMS/$retropie_dir/media" \
 					-i "$RETROPIE_ROMS/$retropie_dir" \
 					-s screenscraper \
+					--videos \
 					--unattend \
 					--relative \
 					--nohints \
@@ -87,6 +88,7 @@ for retropie_dir in "${!DIRS[@]}"; do
 					-g "$RETROPIE_ROMS/$retropie_dir" \
 					-o "$RETROPIE_ROMS/$retropie_dir/media" \
 					-i "$RETROPIE_ROMS/$retropie_dir" \
+					--videos \
 					--unattend \
 					--relative \
 					--nohints \
