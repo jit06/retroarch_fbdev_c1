@@ -94,7 +94,6 @@ Basicaly, it installs fbi, display the picture to fbdev, dump /dev/fbo and compr
 
 # Todo (in no particular order)
 - integrate accelerated video player for video preview
-- remove uneeded patch for system.sh and amiberry (retropie has been updated)
 - integrate my gpio_joypad as systemd service
 - add mupen64plus-next (for now, it crashes after rom load)
 - assign a default emulator during skyscraper to retroarch playlist conversion
