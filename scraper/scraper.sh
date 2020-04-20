@@ -1,60 +1,59 @@
 #!/bin/bash
 
-RETROARCH_DIR=/root/.config/retroarch
-RETROPIE_ROMS=/root/RetroPie/roms
+
 SCRIPT=$(readlink -f $0)
 SCRIPTPATH=`dirname $SCRIPT`
-SKYSCRAPER_CMD=/opt/retropie/supplementary/skyscraper/Skyscraper
 
-# match Retropie's system name with Retroarch's one
-declare -A DIRS=( 	[amiga]="Commodore - Amiga"
-					[amstradcpc]="Amstrad - CPC"
-					[atari2600]="Atari - 2600"
-					[atari5200]="Atari - 5200"
-					[atari7800]="Atari - 7800"
-					[atarilynx]="Atari - Lynx"
-					[dreamcast]="Sega - Dreamcast"
-					[gamegear]="Sega - Game Gear"
-					[gb]="Nintendo - Game Boy"
-					[gba]="Nintendo - Game Boy Advance"
-					[gbc]="Nintendo - Game Boy Color"
-					[fds]="Nintendo - Family Computer Disk System"
-					[mame2003]="MAME"
-					[mastersystem]="Sega - Master System - Mark III"
-					[megadrive]="Sega - Mega Drive - Genesis"
-					[n64]="Nintendo - Nintendo 64"
-					[nes]="Nintendo - Nintendo Entertainment System"
-					[neogeo]="FBNeo - Arcade Games"
-					[ngp]="SNK - Neo Geo Pocket"
-					[ngpc]="SNK - Neo Geo Pocket Color"
-					[pce-cd]="NEC - PC Engine CD - TurboGrafx-CD"
-					[pcengine]="NEC - PC Engine - TurboGrafx 16"
-					[psx]="Sony - PlayStation"
-					[sega32x]="Sega - 32X"
-					[segacd]="Sega - Mega-CD - Sega CD"
-					[snes]="Nintendo - Super Nintendo Entertainment System"
-					[satellaview]="Nintendo - Satellaview"
-					[wonderswan]="Bandai - WonderSwan"
-					[wonderswancolor]="Bandai - WonderSwan Color"
-   				  	[vectrex]="GCE - Vectrex"
-					[zxspectrum]="Sinclair - ZX Spectrum"
-				)
+DO_SCRAP=0
+DO_GAMELIST=0
+DO_PLAYLIST=0
 
-echo ""
+source "$SCRIPTPATH/function.sh"
+source "$SCRIPTPATH/settings.sh"
 
+
+while getopts "hsgpU:P:S:" opt; do
+    case "${opt}" in
+        s)
+            DO_SCRAP=1
+            ;;
+        g)
+            DO_GAMELIST=1
+            ;;
+        p)
+            DO_PLAYLIST=1
+            ;;
+        U)
+            SCRAPER_USER=${OPTARG}
+            ;;
+        P)
+            SCRAPER_PWD=${OPTARG}
+            ;;
+        S)
+            SCAPER_SOURCE=${OPTARG}
+            ;;
+        h)
+            display_help
+            ;;
+        *)
+            display_help
+            ;;
+    esac
+done
+shift $((OPTIND-1))
+
+
+echo
 for retropie_dir in "${!DIRS[@]}"; do 
 	
 	# do nothing if the system is not used
 	if [ ! -d "$RETROPIE_ROMS/$retropie_dir" ]; then
-		echo "no $retropie_dir directory: skipped"
-		echo ""
+		msg "/!\\ no $retropie_dir directory: skipped /!\\"
 		continue
 	fi
 
-	echo "=================================="
-	echo " system '${DIRS[$retropie_dir]}'"
-	echo "=================================="
-
+	headermsg "system '${DIRS[$retropie_dir]}'"
+	
 	# scrap with skyscraper in system roms dir
 	if [ ! -d "$RETROPIE_ROMS/$retropie_dir/media" ]; then
 		mkdir "$RETROPIE_ROMS/$retropie_dir/media"
@@ -70,44 +69,16 @@ for retropie_dir in "${!DIRS[@]}"; do
 		system=$retropie_dir
 	fi
 
-	# scrap ! you may change "screenscraper" value to whatever skyscraper source you prefer
-	$SKYSCRAPER_CMD -p $system \
-					-g "$RETROPIE_ROMS/$retropie_dir" \
-					-o "$RETROPIE_ROMS/$retropie_dir/media" \
-					-i "$RETROPIE_ROMS/$retropie_dir" \
-					-s screenscraper \
-					--videos \
-					--unattend \
-					--relative \
-					--nohints \
-					--nomarquees \
-					-u $1:$2
-	
-	# generate gamelist
-	$SKYSCRAPER_CMD -p $system \
-					-g "$RETROPIE_ROMS/$retropie_dir" \
-					-o "$RETROPIE_ROMS/$retropie_dir/media" \
-					-i "$RETROPIE_ROMS/$retropie_dir" \
-					--videos \
-					--unattend \
-					--relative \
-					--nohints \
-					--skipped \
-					--nomarquees
 
-	# point retroarch thumbnails directories to skyscraper one's
-	if [ ! -d "$RETROARCH_DIR/thumbnails/${DIRS[$retropie_dir]}" ]; then
-		mkdir "$RETROARCH_DIR/thumbnails/${DIRS[$retropie_dir]}"
+	if [ "$DO_SCRAP" == "1" ]; then
+		scrap $system $retropie_dir
 	fi
 	
-	cd "$RETROARCH_DIR/thumbnails/${DIRS[$retropie_dir]}"
-	rm -R Named_*
-	ln -s "$RETROPIE_ROMS/$retropie_dir/media/covers" Named_Boxarts 
-	ln -s "$RETROPIE_ROMS/$retropie_dir/media/screenshots" Named_Snaps   
-	ln -s "$RETROPIE_ROMS/$retropie_dir/media/marquees" Named_Titles
-
-	# convert skyscraper gamelist to retroarch playlists
-	xsltproc --stringparam db_name "${DIRS[$retropie_dir]}.lpl" --stringparam rom_path "$RETROPIE_ROMS/$retropie_dir" "$SCRIPTPATH/skyscraperToPlaylist.xsl" "$RETROPIE_ROMS/$retropie_dir/gamelist.xml" > "$RETROARCH_DIR/playlists/${DIRS[$retropie_dir]}.lpl"
-
-	echo ""
+	if [ "$DO_GAMELIST" == "1" ]; then
+		gamelist $system $retropie_dir
+	fi
+	
+	if [ "$DO_PLAYLIST" == "1" ]; then
+		playlist $system $retropie_dir
+	fi
 done

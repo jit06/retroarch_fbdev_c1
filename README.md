@@ -99,7 +99,4 @@ Basicaly, it installs fbi, display the picture to fbdev, dump /dev/fbo and compr
 - assign a default emulator during skyscraper to retroarch playlist conversion
 - integrate bash launcher for retroarch and ad menu entries for changing contrast, brightness, cpu freq and display (cbvs / hdmi)
 - list known n64 and dreamcast games that run correctly
-- add standard help to scraper
-- add an option to bypass scraper to only generate gamelist
-- allow scraper script to accept all predefined variable as argument
 - Test building with Linaro
