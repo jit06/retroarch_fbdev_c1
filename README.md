@@ -62,6 +62,7 @@ All Odroid C1 retropie emulator are compiled, plus lr-flycast and amiberry, so t
 - Sega - Mega Drive - Genesis
 - Nintendo - Nintendo 64
 - Nintendo - Nintendo Entertainment System
+- Nintendo - Family Computer Disk System
 - FBNeo - Arcade Games
 - SNK - Neo Geo Pocket
 - SNK - Neo Geo Pocket Color
@@ -92,7 +93,6 @@ The splash screen can be generated using the script utils/create_splash.sh, whic
 Basicaly, it installs fbi, display the picture to fbdev, dump /dev/fbo and compress it to lzo.
 
 # Todo (in no particular order)
-- video preview is not shown after trying a game that don't have one
 - integrate accelerated video player for video preview
 - remove uneeded patch for system.sh and amiberry (retropie has been updated)
 - integrate my gpio_joypad as systemd service
