@@ -19,12 +19,12 @@ It has been designed for lowres display (cbvs or 480p), suitable for small displ
 - in retroarch: use online updater to update all but cores before doing anything else
 
 Note that it takes several hours to compile and setup everything
+Basicaly, it's an enhanced retropie install without emulationstation, so most if not all retropie docs are valid.
 
 # Roms & scraper
-- Copy your roms and bios in /root/RetroPie or change retroarch settings or mount any usbkey or sdcard to /root/Retropie (ssh is enabled)
-- If you want to use a better scraper than retroarch one's, go to /root/retroarch_fbdev_c1/scraper and launch ./scraper.sh (optionals args are screenscraper login and password, eg. ./scraper.sh mylogin mypassword)
-
-Basicaly, it's a retropie install without emulationstation.
+- Your roms and bios must be in /root/RetroPie/roms and /root/RetroPie/BIOS (unless you change retroarch settings) 
+- If you boot from emmc and have a microSD, it will be automatically mounted to /root/Retropie
+- If you want to use a better scraper than retroarch one's, use the provided one /root/retroarch_fbdev_c1/scraper.sh (scraper.sh -h for help)
 
 # Main Features
 - fast boot : 14 seconds to retroarch interface from cold start
