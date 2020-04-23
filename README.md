@@ -77,6 +77,8 @@ All Odroid C1 retropie emulator are compiled, plus lr-flycast and amiberry, so t
 - Bandai - WonderSwan Color
 - GCE - Vectrex
 - Sinclair - ZX Spectrum
+- Doom engine
+- Quake 1 engine
 
 # Important things to note
 - there is no other user than root, password is the default one : odroid
@@ -99,4 +101,5 @@ Basicaly, it installs fbi, display the picture to fbdev, dump /dev/fbo and compr
 - assign a default emulator during skyscraper to retroarch playlist conversion
 - integrate bash launcher for retroarch and ad menu entries for changing contrast, brightness, cpu freq and display (cbvs / hdmi)
 - list known n64 and dreamcast games that run correctly
+- add SuperTuxKart
 - Test building with Linaro
