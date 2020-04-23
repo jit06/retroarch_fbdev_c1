@@ -58,6 +58,11 @@ if [ -f /media/boot/boot.ini.rej ]; then
 	display_error "boot.ini patch seems to have fail check /media/boot/boot.ini.rej"
 fi
 
+# check for boot.ini patch
+if [ -f /root/RetroPie-Setup/scriptmodules/emulators/retroarch.sh.rej ]; then
+	display_error "retroarch.sh. patch seems to have fail check /root/RetroPie-Setup/scriptmodules/emulators/retroarch.sh.rej"
+fi
+
 # check for journald.conf
 if ! grep -q Storage=volatile /etc/systemd/journald.conf; then
 	display_error "failed to change some journald.conf settings"
