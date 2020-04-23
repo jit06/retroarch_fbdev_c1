@@ -22,6 +22,10 @@ function system_prepare() {
     update-alternatives --set gcc "/usr/bin/gcc-8"
     update-alternatives --set g++ "/usr/bin/g++-8"
 
+    # some app may not compile without thoses links (eg. lr-muppen64plus)
+    ln -s /usr/lib/arm-linux-gnueabihf/libEGL.so /usr/lib/libEGL.so
+    ln -s /usr/lib/arm-linux-gnueabihf/libGLESv2.so /usr/lib/libGLES
+
     # boot logo display
     echo ""
     echo "============================================"
