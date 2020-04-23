@@ -12,7 +12,8 @@ It has been designed for lowres display (cbvs or 480p), suitable for small displ
 
 # Install with sources
 - get official ubuntu minimal 18.04 from Hardkernel and start your Odroid C1/C1+/C0 with it.
-- clone this repository in /root (git clone -depth 1 https://github.com/jit06/retroarch_fbdev_c1)
+- apt-get update && apt-get install git
+- clone this repository in /root (git clone --depth 1 https://github.com/jit06/retroarch_fbdev_c1)
 - cd /root/retroarch_fbdev_c1
 - ./build.sh
 - reboot
