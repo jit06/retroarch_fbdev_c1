@@ -4,7 +4,7 @@
      applyPatch "$md_data/01_hotkey_hack.diff"
      applyPatch "$md_data/02_disable_search.diff"
      applyPatch "$md_data/03_shader_path_config_enable.diff"
-+    mv /root/xmb.c "$md_build/retroarch/menu/drivers/"
++    mv /root/xmb.c "$md_build/menu/drivers/"
  }
  
  function build_retroarch() {
