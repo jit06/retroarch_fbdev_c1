@@ -41,8 +41,17 @@ do
 	fi
 done
 
+# check for amiberry
+if [ ! -f /opt/retropie/emulators/amiberry/amiberry ]; then
+	display_error "amiberry binary missing, check logs"
+fi
 
-# check thzat retroarch service has been created
+# check for retroarch
+if [ ! -f /opt/retropie/emulators/retroarch/bin/retroarch ]; then
+	display_error "retroarch binary missing, check logs"
+fi
+
+# check that retroarch service has been created
 systemctl daemon-reload
 if ! systemctl --all --type service | grep -q "retroarch.service"; then
 	display_error "retroarch service has not been created"
@@ -55,12 +64,12 @@ fi
 
 # check for boot.ini patch
 if [ -f /media/boot/boot.ini.rej ]; then
-	display_error "boot.ini patch seems to have fail check /media/boot/boot.ini.rej"
+	display_error "boot.ini patch seems to have failed check /media/boot/boot.ini.rej"
 fi
 
-# check for boot.ini patch
+# check for retroarch patch
 if [ -f /root/RetroPie-Setup/scriptmodules/emulators/retroarch.sh.rej ]; then
-	display_error "retroarch.sh. patch seems to have fail check /root/RetroPie-Setup/scriptmodules/emulators/retroarch.sh.rej"
+	display_error "retroarch.sh. patch seems to have failed check /root/RetroPie-Setup/scriptmodules/emulators/retroarch.sh.rej"
 fi
 
 # check for journald.conf
