@@ -21,4 +21,4 @@ fi
 dd if=/root/.mplayer/fifo iflag=nonblock of=/dev/null
 
 SIZE=$(fbset -s -fb /dev/fb1 | grep geometry | awk '{b=$4":"$5; print b}')
-mplayer -vo fbdev2:/dev/fb1 -vf scale=$SIZE -fs -slave -input file=/root/.mplayer/fifo -really-quiet "$VIDEO_REAL_FILE" &
+mplayer -vo fbdev2:/dev/fb1 -vf scale=$SIZE -fs -slave -input file=/root/.mplayer/fifo "$VIDEO_REAL_FILE" &
