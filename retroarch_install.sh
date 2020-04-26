@@ -2,6 +2,8 @@
 
 function retroarch_install() {
 
+    mkdir $ODROIDC1_BUILD_PATH/buildlogs 
+
     echo ""
     echo "============================================"
     echo " clone retropie repo...                     "
@@ -16,8 +18,8 @@ function retroarch_install() {
     echo "============================================"
     # apply some custom patches for Odroid c1 to make compilation works
     patch $RETROPIE_SETUP_PATH/scriptmodules/libretrocores/lr-flycast.sh $ODROIDC1_BUILD_PATH/patches/lr-flycast.patch
-	cp $ODROIDC1_BUILD_PATH/patches/xmb.c /root/
-	patch $RETROPIE_SETUP_PATH/scriptmodules/emulators/retroarch.sh $ODROIDC1_BUILD_PATH/patches/retroarch.sh.patch
+    cp $ODROIDC1_BUILD_PATH/patches/xmb.c /root/
+    patch $RETROPIE_SETUP_PATH/scriptmodules/emulators/retroarch.sh $ODROIDC1_BUILD_PATH/patches/retroarch.sh.patch
 	
 
     echo ""
@@ -29,7 +31,7 @@ function retroarch_install() {
     for package in ${PACKAGES[@]}
     do
 	echo "----------- start $package -------------"
-        ./retropie_packages.sh $package
+        ./retropie_packages.sh $package > $ODROIDC1_BUILD_PATH/buildlogs/$package.log
 	echo "--------- finished $package ------------"
 	echo ""
  	# set dedicated folder for pcengine CDrom games
