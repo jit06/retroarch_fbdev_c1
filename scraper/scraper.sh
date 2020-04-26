@@ -34,9 +34,11 @@ while getopts "hsgpU:P:S:" opt; do
             ;;
         h)
             display_help
+            exit
             ;;
         *)
             display_help
+            exit
             ;;
     esac
 done
