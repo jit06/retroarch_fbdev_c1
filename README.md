@@ -5,19 +5,26 @@ It uses fbdev (no X) and allows to play confortably a lots of retro consoles inc
 It provides a way to scrap roms with skyscraper and convert de result into retroarch compatible playlists and thumbnails
 It has been designed for lowres display (cbvs or 480p), suitable for small display or true NTSC composite display.
 
-# Install with binary release
+# Install with binary release (recommended)
 - uncompress de archive with xz (eg. ez -d gamodroidC0_v1.0.img.xz)
 - write it to an emmc or sdcard with must be at least 4GB (eg. sudo dd if=gamodroidC0_v1.0.img of=/dev/sdb bs=4M)
 - boot you Odroid C1/C1+/C0 with it
 
-# Install with sources
+# Install from sources (may not work)
 - get official ubuntu minimal 18.04 from Hardkernel and start your Odroid C1/C1+/C0 with it.
 - apt-get update && apt-get install git
 - clone this repository in /root (git clone --depth 1 https://github.com/jit06/retroarch_fbdev_c1)
 - cd /root/retroarch_fbdev_c1
 - ./build.sh
 - reboot
-- in retroarch: use online updater to update all but cores before doing anything else
+- in retroarch: go in online updater and update the following:
+	- Core info files
+	- assets
+	- joypad profiles
+	- cheats
+	- databases
+	- overlay
+	- glsl shaders
 
 Note that it takes several hours to compile and setup everything
 Basicaly, it's an enhanced retropie install without emulationstation, so most if not all retropie docs are valid.
@@ -25,7 +32,7 @@ Basicaly, it's an enhanced retropie install without emulationstation, so most if
 # Roms & scraper
 - Your roms and bios must be in /root/RetroPie/roms and /root/RetroPie/BIOS (unless you change retroarch settings) 
 - If you boot from emmc and have a microSD, it will be automatically mounted to /root/Retropie
-- If you want to use a better scraper than retroarch one's, use the provided one /root/retroarch_fbdev_c1/scraper.sh (scraper.sh -h for help)
+- If you want to use a better scraper than retroarch one's, use the provided one /root/retroarch_fbdev_c1/scraper.sh (./scraper.sh -h for help)
 
 # Main Features
 - fast boot : 14 seconds to retroarch interface from cold start
