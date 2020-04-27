@@ -3,6 +3,9 @@
 # remove cached pkg
 apt-get clean
 
+# set hostname
+echo "gamodroid" > /etc/hostname
+
 # clean up tmp files
 rm /var/backups/*
 rm -R /var/log/*
