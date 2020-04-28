@@ -17,7 +17,12 @@ function retroarch_optimize() {
     echo "============================================"
     # copy retroarch config to make them run fine on C1
     cp $ODROIDC1_BUILD_PATH/configs/retroarch* /root/.config/retroarch/
+    rm /opt/retropie/emulators/retroarch/retroarch.cfg
+    ln -s /root/.config/retroarch/retroarch.cfg /opt/retropie/emulators/retroarch/retroarch.cfg
     
     # copy fbneo dat files
     cp $ODROIDC1_BUILD_PATH/configs/*.dat /root/.config/retroarch/
+    
+    # copy amiberry config file
+    cp $ODROIDC1_BUILD_PATH/configs/amiberry.conf /opt/retropie/emulators/amiberry/conf/
 }
