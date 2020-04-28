@@ -4498,7 +4498,8 @@ static void xmb_frame(void *data, video_frame_info_t *video_info)
       float scaled_thumb_width  = thumb_width * thumbnail_scale_factor;
       float scaled_thumb_height = thumb_height * thumbnail_scale_factor;
       float thumb_x             = right_thumbnail_margin_x + ((thumb_width - scaled_thumb_width) / 2.0f);
-      float thumb_y             = xmb->margins_title_top + (xmb->icon_size / 4.0f) + ((thumb_height - scaled_thumb_height) / 2.0f);
+      float thumb_y             = xmb->margins_screen_top + (xmb->icon_size / 4.0f) - 60; // JIT06 MOD added +60
+//    float thumb_y             = xmb->margins_title_top + (xmb->icon_size / 4.0f) + ((thumb_height - scaled_thumb_height) / 2.0f);
 
       gfx_thumbnail_draw(
             userdata,
@@ -4655,7 +4656,7 @@ static void xmb_frame(void *data, video_frame_info_t *video_info)
        *   (if available) */
       else if (show_right_thumbnail || show_left_thumbnail)
       {
-         float y_offset            = ((xmb->depth != 1) ? 1.2f : -0.25f) * xmb->icon_size;
+         float y_offset            = /*((xmb->depth != 1) ? 1.2f : -0.25f)*/-0.25f * xmb->icon_size; // JTIP06 MOD removed conditional offset
          float thumb_width         = xmb->icon_size * 2.4f;
          float thumb_height        = thumbnail_margin_height_under - xmb->margins_title_bottom - (xmb->icon_size / 6.0f) - y_offset;
          float scaled_thumb_width  = thumb_width * thumbnail_scale_factor * 2.0f;              // JIT06 MOD added * 2.0f
@@ -4722,8 +4723,8 @@ static void xmb_frame(void *data, video_frame_info_t *video_info)
                   (powerstate.percent > 20)? XMB_TEXTURE_BATTERY_40   :
                   XMB_TEXTURE_BATTERY_20
                   ],
-                  x_pos_icon / 2, // JIT06 MOD was video_width - (xmb->icon_size / 2) - x_pos_icon
-                  xmb->icon_size + 10, // JIT06 added +10
+                  x_pos_icon / 2, 		// JIT06 MOD was video_width - (xmb->icon_size / 2) - x_pos_icon
+                  xmb->icon_size + 10, 	// JIT06 added +10
                   video_width,
                   video_height,
                   1,
@@ -5065,7 +5066,7 @@ static void xmb_layout_psp(xmb_handle_t *xmb, int width)
    unsigned new_font_size, new_header_height;
    float scale_factor            = xmb->last_scale_factor;
 
-   xmb->above_subitem_offset     =  1.2; // JIT06 MOD was 1.5
+   xmb->above_subitem_offset     = -0.35;// JIT06 MOD was 1.5
    xmb->above_item_offset        = -0.35;// JIT06 MOD was -1.0
    xmb->active_item_factor       =  1.75;// JIT06 MOD was 2.0
    xmb->under_item_offset        =  2.0; // JIT06 MOD was 3
