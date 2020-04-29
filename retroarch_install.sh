@@ -28,6 +28,18 @@ function retroarch_install() {
     echo "============================================"
     # Build Retroarch / Retropie packages
     cd $RETROPIE_SETUP_PATH
+    
+    # first try may fail because of mali / gles being overrided
+    ./retropie_packages.sh retroarch > $ODROIDC1_BUILD_PATH/buildlogs/retroarch_first.log
+    
+    # some mali libs seems to be overriden during retropie dep-packages installation...
+    apt-get -y install --reinstall  mali-fbdev
+    
+    # some app may not compile without thoses links (eg. lr-muppen64plus, skyscraper, flycast and retroarch)
+    ln -s /usr/lib/arm-linux-gnueabihf/libEGL.so /usr/lib/libEGL.so
+    ln -s /usr/lib/arm-linux-gnueabihf/libGLESv2.so /usr/lib/libGLES.so
+    
+    # start installing all needed packages
     for package in ${PACKAGES[@]}
     do
 	echo "----------- start $package -------------"
@@ -35,11 +47,10 @@ function retroarch_install() {
 	echo "--------- finished $package ------------"
 	echo ""
  	# set dedicated folder for pcengine CDrom games
- 	mkdir /root/RetroPie/roms/pce-cd/
+ 	if [ ! -d /root/RetroPie/roms/pce-cd/ ]; then
+ 		mkdir /root/RetroPie/roms/pce-cd/
+ 	fi
     done
-    # some mali libs seems to be overriden during compilation...
-    apt-get -y install --reinstall  mali-fbdev
-
 
     echo ""
     echo "============================================"

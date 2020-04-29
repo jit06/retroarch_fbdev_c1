@@ -22,10 +22,6 @@ function system_prepare() {
     update-alternatives --set gcc "/usr/bin/gcc-8"
     update-alternatives --set g++ "/usr/bin/g++-8"
 
-    # some app may not compile without thoses links (eg. lr-muppen64plus)
-    ln -s /usr/lib/arm-linux-gnueabihf/libEGL.so /usr/lib/libEGL.so
-    ln -s /usr/lib/arm-linux-gnueabihf/libGLESv2.so /usr/lib/libGLES.so
-
     # boot logo display
     echo ""
     echo "============================================"
@@ -95,6 +91,7 @@ function system_prepare() {
     echo "============================================"
     echo " setting up mplayer for video preview...    "
     echo "============================================"
+    mkdir /root/.mplayer
     mkfifo /root/.mplayer/fifo
     cp $ODROIDC1_BUILD_PATH/scripts/video_*.sh /opt
 
