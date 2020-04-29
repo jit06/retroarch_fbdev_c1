@@ -108,5 +108,5 @@ Basicaly, it installs fbi, display the picture to fbdev, dump /dev/fbo and compr
 - add mupen64plus-next (for now, it crashes after rom load)
 - integrate bash launcher for retroarch and ad menu entries for changing contrast, brightness, cpu freq and display (cbvs / hdmi)
 - list known n64 and dreamcast games that run correctly
-- Test building with Linaro
-- Amiberry does not exit
+- Amiberry does not exit with retroarch exit combo
+- try to make boot even faster
