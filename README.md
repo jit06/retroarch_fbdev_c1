@@ -21,3 +21,5 @@ Don't forget to read the [important informations](https://github.com/jit06/retro
 - console cursor enabled by default (throught amiberry disable it...)
 - easy overscan / constrast / brightness settings   
 - libretro launcher for amiberry, so Amiga games (lha) can be started throught retroarch
+
+[![See it in action](https://img.youtube.com/vi/PQSJtzPWedw/0.jpg)](https://www.youtube.com/watch?v=PQSJtzPWedw)
