@@ -30,7 +30,7 @@ function retroarch_install() {
     cd $RETROPIE_SETUP_PATH
     
     # first try may fail because of mali / gles being overrided
-    ./retropie_packages.sh retroarch > $ODROIDC1_BUILD_PATH/buildlogs/retroarch_first.log
+    ./retropie_packages.sh retroarch depends > $ODROIDC1_BUILD_PATH/buildlogs/retroarch_depends.log
     
     # some mali libs seems to be overriden during retropie dep-packages installation...
     apt-get -y install --reinstall  mali-fbdev
