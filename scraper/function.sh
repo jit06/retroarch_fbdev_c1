@@ -49,7 +49,7 @@ function playlist() {
 	fi
 	
 	cd "$RETROARCH_DIR/thumbnails/${DIRS[$retropie_dir]}"
-	rm -R Named_*
+	rm -Rf Named_*
 	ln -s "$RETROPIE_ROMS/$retropie_dir/media/covers" Named_Boxarts 
 	ln -s "$RETROPIE_ROMS/$retropie_dir/media/screenshots" Named_Snaps   
 	ln -s "$RETROPIE_ROMS/$retropie_dir/media/marquees" Named_Titles
