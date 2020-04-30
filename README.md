@@ -8,6 +8,10 @@ Gamodroid has been designed for lowres display (cbvs or 480p), suitable for smal
 
 Finally, It provides a way to scrap roms (with skyscraper) to generated retroarch playlists with thumbnails and videos previews.
 
+# Installation & Docs
+Installation instructions can be found on the [wiki](https://github.com/jit06/retroarch_fbdev_c1/wiki) here: [how to install](https://github.com/jit06/retroarch_fbdev_c1/wiki/How-to-Install)
+Don't forget to read the [important informations](https://github.com/jit06/retroarch_fbdev_c1/wiki/Important-informations) to. 
+
 # Main Features
 - fast boot : 14 seconds to retroarch interface from cold start
 - custom XMB theme and layout with video preview (press start to view it)
