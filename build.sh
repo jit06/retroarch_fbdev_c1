@@ -3,7 +3,7 @@
 # where to install RetroPie-Setup
 RETROPIE_SETUP_PATH=/root/RetroPie-Setup
 # build path for this build script
-ODROIDC1_BUILD_PATH=/root/retroarch_fbdev_c1/
+ODROIDC1_BUILD_PATH=/root/retroarch_fbdev_c1
 
 source "$ODROIDC1_BUILD_PATH/retroarch_packages.sh"
 source "$ODROIDC1_BUILD_PATH/system_prepare.sh"

@@ -19,7 +19,7 @@ function retroarch_install() {
     # apply some custom patches for Odroid c1 to make compilation works
     patch $RETROPIE_SETUP_PATH/scriptmodules/libretrocores/lr-flycast.sh $ODROIDC1_BUILD_PATH/patches/lr-flycast.patch
     cp $ODROIDC1_BUILD_PATH/patches/xmb.c /root/
-    patch $RETROPIE_SETUP_PATH/scriptmodules/emulators/retroarch.sh $ODROIDC1_BUILD_PATH/patches/retroarch.sh.patch
+    sed -i -e 's/    gitPullOrClone$/    gitPullOrClone\n    mv \/root\/xmb.c "\$md_build\/menu\/drivers\/"/g' /root/RetroPie-Setup/scriptmodules/emulators/retroarch.sh
 	
 
     echo ""
