@@ -82,6 +82,6 @@ function system_prepare() {
     echo "============================================"
     echo " custom boot.ini...                          "
     echo "============================================"
-    cp $ODROIDC1_BUILD_PATH/config/boot.ini /media/boot/
+    cp $ODROIDC1_BUILD_PATH/configs/boot.ini /media/boot/
 }
 
