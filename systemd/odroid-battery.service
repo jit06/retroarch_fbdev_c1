@@ -1,0 +1,11 @@
+[Unit]
+Description=odroid C0 battery monitoring service
+After=systemd-user-sessions.service network.target sound.target
+ 
+[Service]
+User=root
+Group=root
+ExecStart=/bin/bash /opt/odroid_battery.sh
+
+[Install]
+WantedBy=multi-user.target

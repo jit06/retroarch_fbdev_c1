@@ -63,7 +63,8 @@ function system_prepare() {
     if [ -e /dev/mmcblk1p1 ]; then
         mount /dev/mmcblk1p1 /root/RetroPie
     fi
-    exit 0
+
+exit 0
     ' >> /etc/rc.local
 
 

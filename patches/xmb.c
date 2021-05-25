@@ -4735,14 +4735,15 @@ static void xmb_frame(void *data, video_frame_info_t *video_info)
       powerstate.len = sizeof(msg);
 
       menu_display_powerstate(&powerstate);
-
+      
+      // JIT06 MOD : force battery level
       if (powerstate.battery_enabled)
       {
          size_t x_pos      = xmb->icon_size / 6;
          size_t x_pos_icon = xmb->margins_title_left;
 
          if (coord_white[3] != 0 &&  !xmb->assets_missing)
-         {
+         {         
             gfx_display_blend_begin(userdata);
             xmb_draw_icon(
                   userdata,
@@ -4760,7 +4761,7 @@ static void xmb_frame(void *data, video_frame_info_t *video_info)
                   XMB_TEXTURE_BATTERY_20
                   ],
                   x_pos_icon / 2, 		// JIT06 MOD was video_width - (xmb->icon_size / 2) - x_pos_icon
-                  xmb->icon_size + 10, 	// JIT06 added +10
+                  xmb->icon_size + 13, 	// JIT06 added +10
                   video_width,
                   video_height,
                   1,
@@ -4770,7 +4771,9 @@ static void xmb_frame(void *data, video_frame_info_t *video_info)
                   xmb->shadow_offset);
             gfx_display_blend_end(userdata);
          }
-
+         
+        // JIT06 MOD : do not show battery %, only icon
+        /*
          percent_width = (unsigned)
             font_driver_get_message_width(
                   xmb->font, msg, (unsigned)strlen(msg), 1);
@@ -4779,6 +4782,7 @@ static void xmb_frame(void *data, video_frame_info_t *video_info)
                video_width - xmb->margins_title_left - x_pos,
                xmb->margins_title_top, 1, 1, TEXT_ALIGN_RIGHT,
                video_width, video_height, xmb->font);
+        */
       }
    }
 
