@@ -20,16 +20,6 @@ echo " install custom battery icons               "
 echo "============================================"
 cp $ODROIDC1_BUILD_PATH/skin/Retroarch/Battery_icons/* /root/.config/retroarch/assets/xmb/retrosystem/png/
 
-
-echo ""
-echo "============================================"
-echo " enabled fake battery kernel module         "
-echo "============================================"
-sed -i 's/^.*exit 0//' /etc/rc.local
-echo "insmod /lib/modules/3.10.107/kernel/drivers/power/test_power.ko" >> /etc/rc.local
-echo "exit 0" >> /etc/rc.local
-
-
 echo ""
 echo "============================================"
 echo " install odroid-battery service             "
