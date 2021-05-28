@@ -12,11 +12,7 @@ function scrap() {
 					-o "$RETROPIE_ROMS/$retropie_dir/media" \
 					-i "$RETROPIE_ROMS/$retropie_dir" \
 					-s $SCAPER_SOURCE \
-					--videos \
-					--unattend \
-					--relative \
-					--nohints \
-					--nomarquees \
+					--flags videos,unattend,relative,nohints,nomarquees \
 					-u $SCRAPER_USER:$SCRAPER_PWD
 }
 
@@ -31,12 +27,7 @@ function gamelist() {
 					-g "$RETROPIE_ROMS/$retropie_dir" \
 					-o "$RETROPIE_ROMS/$retropie_dir/media" \
 					-i "$RETROPIE_ROMS/$retropie_dir" \
-					--videos \
-					--unattend \
-					--relative \
-					--nohints \
-					--skipped \
-					--nomarquees
+					--flags videos,unattend,relative,nohints,skipped,nomarquees
 }
 
 function playlist() {
