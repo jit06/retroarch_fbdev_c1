@@ -12,6 +12,12 @@ sed -i -e 's/setenv m "480p"/setenv m "480cvbs" /g' /media/boot/boot.ini
 
 echo ""
 echo "============================================"
+echo " set overscan                               "
+echo "============================================"
+echo "16 12 704 468" >> /media/boot/overscan
+
+echo ""
+echo "============================================"
 echo " change uboot                               "
 echo "============================================"
 fw_setenv outputmode 480cvbs
