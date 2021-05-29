@@ -29,8 +29,7 @@ echo "odroid-battery : module ready. Start monitoring ADC0..."
 
 while true ;
 do
-    #ADCVAL=$(cat /sys/class/saradc/saradc_ch0)
-    ADCVAL=760
+    ADCVAL=$(cat /sys/class/saradc/saradc_ch0)
 
     # guess battery state with to "high to be true" adc value
     if [ $ADCVAL -gt $MAX_LEVEL ]; then
@@ -44,11 +43,9 @@ do
 		 if [ $LAST_LED_STATE -eq 0 ] ; then
 		    LAST_LED_STATE=1
 		    echo 1 > $ACCESS/value
-		    echo "low level led ON"
 		 else
 		    LAST_LED_STATE=0
 		    echo 0 > $ACCESS/value
-		    echo "low level led OFF"
 		 fi
     fi
     
