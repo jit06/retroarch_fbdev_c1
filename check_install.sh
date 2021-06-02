@@ -99,8 +99,3 @@ fi
 if ! grep -q terminfo.txt /etc/profile; then
 	display_error "failed to add cusotmisation to /etc/profile"
 fi
-
-# check for quiet login
-if [ ! -f /root/.hushlogin ]; then
-	display_error "missing /root/.hushlogin"
-fi

@@ -56,7 +56,7 @@
 
 #include "../../tasks/tasks_internal.h"
 
-#include "../../cheevos-new/badges.h"
+#include "../../cheevos/badges.h"
 #include "../../content.h"
 
 #define XMB_RIBBON_ROWS 64
@@ -66,6 +66,23 @@
 #ifndef XMB_DELAY
 #define XMB_DELAY 166.66667f
 #endif
+
+/* Specifies minimum period (in usec) between
+ * tab switch events when input repeat is
+ * active (i.e. when navigating between top level
+ * menu categories by *holding* left/right on
+ * RetroPad or keyboard)
+ * > Note: We want to set a value of 100 ms
+ *   here, but doing so leads to bad pacing when
+ *   running at 60 Hz (due to random frame time
+ *   deviations - input repeat cycles always take
+ *   slightly more or less than 100 ms, so tab
+ *   switches occur every n or (n + 1) frames,
+ *   which gives the appearance of stuttering).
+ *   Reducing the delay by 1 ms accommodates
+ *   any timing fluctuations, resulting in
+ *   smooth motion */
+#define XMB_TAB_SWITCH_REPEAT_DELAY 99000
 
 #if 0
 #define XMB_DEBUG
@@ -345,6 +362,10 @@ typedef struct xmb_handle
    float fullscreen_thumbnail_alpha;
    size_t fullscreen_thumbnail_selection;
    char fullscreen_thumbnail_label[255];
+
+   /* Keeps track of the last time tabs were switched
+    * via a MENU_ACTION_LEFT/MENU_ACTION_RIGHT event */
+   retro_time_t last_tab_switch_time;
 
 } xmb_handle_t;
 
@@ -881,17 +902,32 @@ static void xmb_render_messagebox_internal(
    unsigned i, y_position;
    int x, y, longest = 0, longest_width = 0;
    float line_height        = 0;
-   struct string_list *list = !string_is_empty(message)
-      ? string_split(message, "\n") : NULL;
+   int usable_width         = 0;
+   struct string_list *list = NULL;
+   char wrapped_message[MENU_SUBLABEL_MAX_LENGTH];
 
-   if (!list || !xmb || !xmb->font)
-   {
-      if (list)
-         string_list_free(list);
-      return;
-   }
+   wrapped_message[0] = '\0';
 
-   if (list->elems == 0)
+   /* Sanity check */
+   if (string_is_empty(message) ||
+       !xmb ||
+       !xmb->font)
+      goto end;
+
+   usable_width = (int)video_width - (xmb->margins_dialog * 8);
+
+   if (usable_width < 1)
+      goto end;
+
+   /* Split message into lines */
+   word_wrap(
+         wrapped_message, message,
+         usable_width / (xmb->font_size * 0.6f),
+         true, 0);
+
+   list = string_split(wrapped_message, "\n");
+
+   if (!list || list->elems == 0)
       goto end;
 
    line_height      = xmb->font->size * 1.2;
@@ -906,14 +942,15 @@ static void xmb_render_messagebox_internal(
    /* find the longest line width */
    for (i = 0; i < list->size; i++)
    {
-      const char *msg  = list->elems[i].data;
-      int len          = (int)utf8len(msg);
+      const char *msg = list->elems[i].data;
 
-      if (len > longest)
+      if (!string_is_empty(msg))
       {
-         longest       = len;
-         longest_width = font_driver_get_message_width(
+         int width = font_driver_get_message_width(
                xmb->font, msg, (unsigned)strlen(msg), 1);
+
+         longest_width = (width > longest_width) ?
+               width : longest_width;
       }
    }
 
@@ -930,7 +967,7 @@ static void xmb_render_messagebox_internal(
          line_height * list->size + xmb->margins_dialog * 2,
          video_width, video_height,
          NULL,
-         xmb->margins_slice, 1.0,
+         xmb->margins_slice, xmb->last_scale_factor,
          xmb->textures.list[XMB_TEXTURE_DIALOG_SLICE]);
 
    for (i = 0; i < list->size; i++)
@@ -957,7 +994,8 @@ static void xmb_render_messagebox_internal(
             0xffffffff);
 
 end:
-   string_list_free(list);
+   if (list)
+      string_list_free(list);
 }
 
 static void xmb_update_savestate_thumbnail_path(void *data, unsigned i)
@@ -1020,11 +1058,9 @@ static void xmb_update_savestate_thumbnail_path(void *data, unsigned i)
             strlcat(path, ".png", sizeof(path));
 
             if (path_is_valid(path))
-            {
                strlcpy(
                      xmb->savestate_thumbnail_file_path, path,
                      sizeof(xmb->savestate_thumbnail_file_path));
-            }
          }
       }
    }
@@ -1995,7 +2031,7 @@ static void xmb_context_destroy_horizontal_list(xmb_handle_t *xmb)
       file_list_get_at_offset(xmb->horizontal_list, i,
             &path, NULL, NULL, NULL);
 
-      if (!path || !strstr(path, ".lpl"))
+      if (!path || !string_ends_with(path, ".lpl"))
          continue;
 
       video_driver_texture_unload(&node->icon);
@@ -2094,7 +2130,7 @@ static void xmb_context_reset_horizontal_list(
       if (!path)
          continue;
 
-      if (!strstr(path, ".lpl"))
+      if (!string_ends_with(path, ".lpl"))
          continue;
 
       {
@@ -4462,7 +4498,7 @@ static void xmb_frame(void *data, video_frame_info_t *video_info)
          1, 1, TEXT_ALIGN_LEFT,
          video_width, video_height, xmb->font);
     */
-    
+
    if (menu_core_enable)
    {
       menu_entries_get_core_title(title_msg, sizeof(title_msg));
@@ -4499,7 +4535,7 @@ static void xmb_frame(void *data, video_frame_info_t *video_info)
       float scaled_thumb_height = thumb_height * thumbnail_scale_factor;
       float thumb_x             = right_thumbnail_margin_x + ((thumb_width - scaled_thumb_width) / 2.0f);
       float thumb_y             = xmb->margins_screen_top + (xmb->icon_size / 4.0f) - 60; // JIT06 MOD added +60
-//    float thumb_y             = xmb->margins_title_top + (xmb->icon_size / 4.0f) + ((thumb_height - scaled_thumb_height) / 2.0f);
+//      float thumb_y             = xmb->margins_title_top + (xmb->icon_size / 4.0f) + ((thumb_height - scaled_thumb_height) / 2.0f);
 
       gfx_thumbnail_draw(
             userdata,
@@ -4656,7 +4692,7 @@ static void xmb_frame(void *data, video_frame_info_t *video_info)
        *   (if available) */
       else if (show_right_thumbnail || show_left_thumbnail)
       {
-         float y_offset            = /*((xmb->depth != 1) ? 1.2f : -0.25f)*/-0.25f * xmb->icon_size; // JTIP06 MOD removed conditional offset
+         float y_offset            = ((xmb->depth != 1) ? 1.2f : -0.25f) * xmb->icon_size;
          float thumb_width         = xmb->icon_size * 2.4f;
          float thumb_height        = thumbnail_margin_height_under - xmb->margins_title_bottom - (xmb->icon_size / 6.0f) - y_offset;
          float scaled_thumb_width  = thumb_width * thumbnail_scale_factor * 2.0f;              // JIT06 MOD added * 2.0f
@@ -4699,14 +4735,15 @@ static void xmb_frame(void *data, video_frame_info_t *video_info)
       powerstate.len = sizeof(msg);
 
       menu_display_powerstate(&powerstate);
-
+      
+      // JIT06 MOD : force battery level
       if (powerstate.battery_enabled)
       {
          size_t x_pos      = xmb->icon_size / 6;
          size_t x_pos_icon = xmb->margins_title_left;
 
          if (coord_white[3] != 0 &&  !xmb->assets_missing)
-         {
+         {         
             gfx_display_blend_begin(userdata);
             xmb_draw_icon(
                   userdata,
@@ -4724,7 +4761,7 @@ static void xmb_frame(void *data, video_frame_info_t *video_info)
                   XMB_TEXTURE_BATTERY_20
                   ],
                   x_pos_icon / 2, 		// JIT06 MOD was video_width - (xmb->icon_size / 2) - x_pos_icon
-                  xmb->icon_size + 10, 	// JIT06 added +10
+                  xmb->icon_size + 13, 	// JIT06 added +10
                   video_width,
                   video_height,
                   1,
@@ -4734,7 +4771,9 @@ static void xmb_frame(void *data, video_frame_info_t *video_info)
                   xmb->shadow_offset);
             gfx_display_blend_end(userdata);
          }
-
+         
+        // JIT06 MOD : do not show battery %, only icon
+        /*
          percent_width = (unsigned)
             font_driver_get_message_width(
                   xmb->font, msg, (unsigned)strlen(msg), 1);
@@ -4743,6 +4782,7 @@ static void xmb_frame(void *data, video_frame_info_t *video_info)
                video_width - xmb->margins_title_left - x_pos,
                xmb->margins_title_top, 1, 1, TEXT_ALIGN_RIGHT,
                video_width, video_height, xmb->font);
+        */
       }
    }
 
@@ -4780,11 +4820,12 @@ static void xmb_frame(void *data, video_frame_info_t *video_info)
          gfx_display_blend_end(userdata);
       }
 
-      timedate[0]        = '\0';
+      timedate[0]             = '\0';
 
-      datetime.s         = timedate;
-      datetime.len       = sizeof(timedate);
-      datetime.time_mode = settings->uints.menu_timedate_style;
+      datetime.s              = timedate;
+      datetime.len            = sizeof(timedate);
+      datetime.time_mode      = settings->uints.menu_timedate_style;
+      datetime.date_separator = settings->uints.menu_timedate_date_separator;
 
       menu_display_timedate(&datetime);
 
@@ -5053,7 +5094,7 @@ static void xmb_layout_ps3(xmb_handle_t *xmb, int width)
    xmb->margins_setting_left     = 600.0 * scale_factor * scale_mod[6];
    xmb->margins_dialog           = 48 * scale_factor;
 
-   xmb->margins_slice            = 16;
+   xmb->margins_slice            = 16 * scale_factor;
 
    xmb->icon_size                = 128.0 * scale_factor;
    xmb->font_size                = new_font_size;
@@ -5101,7 +5142,7 @@ static void xmb_layout_psp(xmb_handle_t *xmb, int width)
    xmb->margins_label_top        = new_font_size / 3.0;
    xmb->margins_setting_left     = 600.0 * scale_factor;
    xmb->margins_dialog           = 48 * scale_factor;
-   xmb->margins_slice            = 16;
+   xmb->margins_slice            = 16 * scale_factor;
    xmb->icon_size                = 128.0 * scale_factor;
    xmb->font_size                = new_font_size;
 
@@ -5383,6 +5424,7 @@ static void *xmb_init(void **userdata, bool video_is_threaded)
 
    gfx_thumbnail_set_stream_delay(-1.0f);
    gfx_thumbnail_set_fade_duration(-1.0f);
+   gfx_thumbnail_set_fade_missing(false);
 
    xmb->use_ps3_layout      = xmb_use_ps3_layout(settings, width, height);
    xmb->last_use_ps3_layout = xmb->use_ps3_layout;
@@ -6844,6 +6886,36 @@ static enum menu_action xmb_parse_menu_entry_action(
    /* Scan user inputs */
    switch (action)
    {
+      case MENU_ACTION_LEFT:
+      case MENU_ACTION_RIGHT:
+         /* Check whether left/right action will
+          * trigger a tab switch event */
+         if (xmb->depth == 1)
+         {
+            retro_time_t current_time = menu_driver_get_current_time();
+            size_t scroll_accel       = 0;
+
+            /* Determine whether input repeat is
+             * currently active
+             * > This is always true when scroll
+             *   acceleration is greater than zero */
+            menu_driver_ctl(MENU_NAVIGATION_CTL_GET_SCROLL_ACCEL,
+                  &scroll_accel);
+
+            if (scroll_accel > 0)
+            {
+               /* Ignore input action if tab switch period
+                * is less than defined limit */
+               if ((current_time - xmb->last_tab_switch_time) <
+                     XMB_TAB_SWITCH_REPEAT_DELAY)
+               {
+                  new_action = MENU_ACTION_NOOP;
+                  break;
+               }
+            }
+            xmb->last_tab_switch_time = current_time;
+         }
+         break;
       case MENU_ACTION_START:
          // JIT06 MOD get current selected entry and try to find video preview instead of fullscreen thumbnail
 	     selection = menu_navigation_get_selection();
@@ -6867,7 +6939,7 @@ static enum menu_action xmb_parse_menu_entry_action(
 
             xmb_show_fullscreen_thumbnails(xmb, selection);
             new_action = MENU_ACTION_NOOP;
-         } */
+         }*/
          break;
       default:
          /* In all other cases, pass through input

@@ -1,11 +1,12 @@
 [Unit]
 Description=Retroarch service
 After=systemd-user-sessions.service network.target sound.target
+Before=retroarch.service
  
 [Service]
 User=root
 Group=root
-ExecStart=/bin/bash /opt/start_retroarch.sh
+ExecStart=/usr/local/bin/gpio_joypad
 
 [Install]
 WantedBy=multi-user.target
