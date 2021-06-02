@@ -3,6 +3,12 @@
 # build path for this build script
 ODROIDC1_BUILD_PATH=/root/retroarch_fbdev_c1
 
+echo ""
+echo "============================================"
+echo " install alsa utils for volume control      "
+echo "============================================"
+apt-get -y install alsa-utils
+
 
 echo ""
 echo "============================================"
