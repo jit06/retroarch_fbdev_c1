@@ -21,6 +21,8 @@ retroarch_install
 retroarch_optimize
 
 # clean up
+systemctl disable apt-daily-upgrade wpa_supplicant
+rm -Rf /root/gpio_joypad /root/wiringPi
 apt-get clean
 
 echo ""
