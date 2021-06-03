@@ -11,6 +11,9 @@ source "$ODROIDC1_BUILD_PATH/system_splash.sh"
 source "$ODROIDC1_BUILD_PATH/retroarch_install.sh"
 source "$ODROIDC1_BUILD_PATH/retroarch_optimize.sh"
 
+# clean lock, just in case...
+rm -Rf /var/lib/dpkg/lock-frontend
+
 # update base system and install needed packages
 system_prepare
 # create uInitrd with splash image
