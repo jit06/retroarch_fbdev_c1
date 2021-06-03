@@ -12,7 +12,7 @@ source "$ODROIDC1_BUILD_PATH/retroarch_install.sh"
 source "$ODROIDC1_BUILD_PATH/retroarch_optimize.sh"
 
 # clean lock, just in case...
-rm -Rf /var/lib/dpkg/lock-frontend
+rm -Rf /var/lib/dpkg/lock-frontend /var/lib/apt/lists/lock /var/cache/apt/archives/lock /var/lib/dpkg/lock
 
 # update base system and install needed packages
 system_prepare
