@@ -17,10 +17,9 @@ function retroarch_install() {
     echo " apply odroid c1 patches...                 "
     echo "============================================"
     # apply some custom patches for Odroid c1 to make compilation works
-    patch $RETROPIE_SETUP_PATH/scriptmodules/libretrocores/lr-flycast.sh $ODROIDC1_BUILD_PATH/patches/lr-flycast.patch
     cp $ODROIDC1_BUILD_PATH/patches/xmb.c /root/
     sed -i -e 's/    gitPullOrClone$/    gitPullOrClone\n    mv \/root\/xmb.c "\$md_build\/menu\/drivers\/"/g' /root/RetroPie-Setup/scriptmodules/emulators/retroarch.sh
-	
+
 
     echo ""
     echo "============================================"
@@ -28,17 +27,17 @@ function retroarch_install() {
     echo "============================================"
     # Build Retroarch / Retropie packages
     cd $RETROPIE_SETUP_PATH
-    
+
     # first try may fail because of mali / gles being overrided
     ./retropie_packages.sh retroarch depends > $ODROIDC1_BUILD_PATH/buildlogs/retroarch_depends.log
-    
+
     # some mali libs seems to be overriden during retropie dep-packages installation...
     apt-get -y install --reinstall  mali-fbdev
-    
+
     # some app may not compile without thoses links (eg. lr-muppen64plus, skyscraper, flycast and retroarch)
     ln -s /usr/lib/arm-linux-gnueabihf/libEGL.so /usr/lib/libEGL.so
     ln -s /usr/lib/arm-linux-gnueabihf/libGLESv2.so /usr/lib/libGLES.so
-    
+
     # start installing all needed packages
     for package in ${PACKAGES[@]}
     do
@@ -75,7 +74,7 @@ function retroarch_install() {
     echo "============================================"
     echo " Install custom retroarch theme...          "
     echo "============================================"
-	cp -R $ODROIDC1_BUILD_PATH/skin/Retroarch/GamOdroid_theme /root/.config/retroarch/
+    cp -R $ODROIDC1_BUILD_PATH/skin/Retroarch/GamOdroid_theme /root/.config/retroarch/
 
     echo ""
     echo "============================================"
