@@ -2,8 +2,8 @@
 
 # retropie packages to compile and install
 PACKAGES=(retroarch \
-		 skyscraper \
-	     amiberry \
+	 skyscraper \
+	 amiberry \
          lr-atari800 \
          lr-beetle-ngp \
          lr-beetle-pce-fast \
