@@ -29,7 +29,6 @@ systemctl disable apt-daily.timer
 systemctl mask apt-daily.service
 systemctl disable apt-daily-upgrade wpa_supplicant
 systemctl daemon-reload
-rm -Rf /root/gpio_joypad /root/wiringPi
 apt-get clean
 
 echo ""
