@@ -3851,7 +3851,7 @@ static enum menu_action xmb_parse_menu_entry_action(
       case MENU_ACTION_START:
          // JIT06 MOD get current selected entry and try to find video preview instead of fullscreen thumbnail
 	     selection = menu_navigation_get_selection();
-	     menu_entry_init(&entry);
+	     MENU_ENTRY_INIT(entry);
 	     entry.path_enabled = false;
 	     entry.value_enabled = false;
 	     entry.rich_label_enabled = false;
