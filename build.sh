@@ -24,6 +24,7 @@ retroarch_install
 retroarch_optimize
 
 # clean up
+rm -Rf /root/libretro-amiberry-launcher
 systemctl stop apt-daily.timer
 systemctl disable apt-daily.timer
 systemctl mask apt-daily.service
