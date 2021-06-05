@@ -30,6 +30,7 @@ systemctl disable apt-daily.timer
 systemctl mask apt-daily.service
 systemctl disable apt-daily-upgrade wpa_supplicant
 systemctl daemon-reload
+apt remove unattended-upgrades
 apt-get clean
 
 echo ""
