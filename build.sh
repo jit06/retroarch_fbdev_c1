@@ -31,6 +31,7 @@ systemctl mask apt-daily.service
 systemctl disable apt-daily-upgrade wpa_supplicant
 systemctl daemon-reload
 apt remove unattended-upgrades
+rm /etc/update-motd.d/91-release-upgrade
 apt-get clean
 
 echo ""
