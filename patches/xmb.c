@@ -3783,7 +3783,7 @@ static enum menu_action xmb_parse_menu_entry_action(
 
    /* If fullscreen thumbnail view is active, any
     * valid menu action will disable it... */
-   if (xmb->show_fullscreen_thumbnails)// JIT06 MOD change condition so we enter here if video preview is playing
+   // JIT06 MOD change condition so we enter here if video preview is playing
    if (playing_video /*xmb->show_fullscreen_thumbnails*/)
    {
       if (action != MENU_ACTION_NOOP)
