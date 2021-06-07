@@ -19,7 +19,7 @@ echo ""
 echo "============================================"
 echo " install kernel with battery support        "
 echo "============================================"
-cd /root 
+cd /root
 wget https://github.com/jit06/linux/releases/download/V2.1/linux-odroic-noconsole-battery.tar.gz
 tar -zxf linux-odroic-noconsole-battery.tar.gz
 cd linux-odroic-noconsole-battery
@@ -38,6 +38,7 @@ echo ""
 echo "============================================"
 echo " install odroid-battery service             "
 echo "============================================"
+echo "test_power" >> /etc/modules-load.d/modules.conf
 cp $ODROIDC1_BUILD_PATH/scripts/odroid_battery.sh /opt/
 cp $ODROIDC1_BUILD_PATH/systemd/odroid-battery.service /etc/systemd/system/
 systemctl daemon-reload
